@@ -1,0 +1,160 @@
+/* Estilos generales y filtros */
+.filters-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    color: #555;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.filter-btn.active {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+}
+
+.search-form input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Contenedor de la tabla */
+.table-responsive {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+/* Estilos de las filas de mensajes */
+.mensaje-summary-row.mensaje-nuevo {
+    font-weight: bold;
+    background-color: #fcfcfc;
+}
+
+.mensaje-summary-row.mensaje-leido {
+    color: #6c757d;
+    font-weight: normal;
+}
+
+.mensaje-summary-row.expanded {
+    background-color: #e9ecef;
+}
+
+.mensaje-expandido td {
+    padding: 0;
+}
+
+.mensaje-contenido-full {
+    padding: 25px;
+    background-color: #f8f9fa;
+}
+
+.mensaje-contenido-full h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.mensaje-contenido-full hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+}
+
+/* Badges de estado */
+.badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-nuevo {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.badge-leido {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+/* Celda de acciones */
+.actions-cell {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 5px;
+}
+.pagination a {
+    color: #007bff;
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+.pagination a:hover {
+    background-color: #e9ecef;
+}
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
