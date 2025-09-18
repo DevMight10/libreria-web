@@ -28,6 +28,7 @@
                 <a href="/proyecto-01/administrador/pages/productos.php">Productos</a>
                 <a href="/proyecto-01/administrador/pages/pedidos.php">Pedidos</a>
                 <a href="/proyecto-01/administrador/pages/mensajes.php">Mensajes</a>
+                <a href="/proyecto-01/administrador/pages/usuarios.php">Usuarios</a>
                 <a href="/proyecto-01/auth/logout.php">Salir</a>
             </nav>
         </div>

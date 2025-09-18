@@ -34,6 +34,11 @@ include '../../public/componentes/admin_header.php';
             <p>Mensajes Nuevos</p>
             <a href="/proyecto-01/administrador/pages/mensajes.php" class="btn btn-primary">Ver Mensajes</a>
         </div>
+        <div class="stat-card">
+            <h3><?= $stats['total_usuarios'] ?></h3>
+            <p>Usuarios</p>
+            <a href="/proyecto-01/administrador/pages/usuarios.php" class="btn btn-primary">Ver Usuarios</a>
+        </div>
     </div>
 
     <div class="chart-container">
