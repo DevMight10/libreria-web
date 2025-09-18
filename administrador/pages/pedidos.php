@@ -1,7 +1,7 @@
  <?php
-    require_once '../config/database.php';
-    require_once '../config/session.php';
-    require_once '../includes/functions.php';
+    require_once '../../config/database.php';
+    require_once '../../auth/session.php';
+    require_once '../../auth/functions.php';
 
     requireAdmin();
 
@@ -132,7 +132,7 @@
         }
     }
 
-include 'includes/admin_header.php';
+include '../../public/componentes/admin_header.php';
 ?>
 
 <link rel="stylesheet" href="styles/pedidos.css">
@@ -276,7 +276,7 @@ include 'includes/admin_header.php';
      </div>
  </main>
 
-<?php include 'includes/admin_footer.php'; ?>  
+<?php include '../../public/componentes/admin_footer.php'; ?>  
  
 
 

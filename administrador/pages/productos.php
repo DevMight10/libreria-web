@@ -1,7 +1,7 @@
  <?php
-  require_once '../config/database.php';
-  require_once '../config/session.php';
-  require_once '../includes/functions.php';
+    require_once '../../config/database.php';
+    require_once '../../auth/session.php';
+    require_once '../../auth/functions.php';
 
   requireAdmin();
   $page_title = 'Gestionar Productos';
@@ -85,7 +85,7 @@
   $stmt->execute($params);
   $productos = $stmt->fetchAll();
 
-  include 'includes/admin_header.php';
+    include '../../public/componentes/admin_header.php';
   ?>
 <link rel="stylesheet" href="styles/productos.css">
 
@@ -207,4 +207,4 @@
 
   
 
-  <?php include 'includes/admin_footer.php'; ?>  
+    <?php include '../../public/componentes/admin_footer.php'; ?>  
