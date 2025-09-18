@@ -42,5 +42,16 @@ class UsuarioModel {
         $stmt = $this->pdo->prepare("DELETE FROM usuarios WHERE id = ?");
         return $stmt->execute([$id]);
     }
+
+    public function getPasswordHash($id) {
+        $stmt = $this->pdo->prepare("SELECT password FROM usuarios WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetchColumn();
+    }
+
+    public function changePassword($id, $new_password_hash) {
+        $stmt = $this->pdo->prepare("UPDATE usuarios SET password = ? WHERE id = ?");
+        return $stmt->execute([$new_password_hash, $id]);
+    }
 }
 ?>

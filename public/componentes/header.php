@@ -33,6 +33,7 @@
                         Carrito <?php echo getCartItemCount(); ?>
                     </a>
                     <a href="/proyecto-01/cliente/pages/mis_pedidos.php" class="opcion">Mis Pedidos</a>
+                    <a href="/proyecto-01/cliente/pages/perfil.php" class="opcion">Mi Perfil</a>
                     <?php if (isAdmin()): ?>
                         <a href="/proyecto-01/administrador/pages/index.php" class="opcion">Admin</a>
                     <?php endif; ?>
