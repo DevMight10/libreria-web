@@ -3,26 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($page_title) ? $page_title . ' - ' : ''; ?>Mini Chic - Ropa de Bebé</title>
+    <title><?php echo isset($page_title) ? $page_title . ' - ' : ''; ?>Librería ADRIMARTH</title>
     
     <link rel="stylesheet" href="/proyecto-01/cliente/styles/base.css">
     <link rel="stylesheet" href="/proyecto-01/cliente/styles/header.css">
     <link rel="stylesheet" href="/proyecto-01/public/global.css">
     <link rel="stylesheet" href="/proyecto-01/cliente/styles/footer.css">
 
-    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header class="header">
         <div class="container">
-            <div class="logo">                                                      
-                <h3 class="logo-text">Mini Chic</h3>
+            <div class="logo">
+                <h3 class="logo-text">Librería ADRIMARTH</h3>
             </div>
 
             <div class="nav-menu">
                 <a href="/proyecto-01/cliente/pages/index.php">Inicio</a>
-                <a href="/proyecto-01/cliente/pages/productos.php">Productos</a>
+                <a href="/proyecto-01/cliente/pages/productos.php">Libros</a>
                 <a href="/proyecto-01/cliente/pages/contacto.php">Contacto</a>
             </div>
 
@@ -41,8 +40,8 @@
                     <a href="/proyecto-01/auth/login.php" id="iniciar-sesion">Iniciar Sesión</a>
                     <a href="/proyecto-01/auth/registro.php" id="registro">Registrarse</a>
                 <?php endif; ?>
-
             </div>
         </div>
     </header>
 </body>
+</html>

@@ -1,71 +1,71 @@
 /* Header y navegación */
-
-.header .container{
+.header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* flex-wrap: wrap; */
 }
 
-.header{
+.header {
     padding-bottom: 20px;
     padding-top: 20px;
-    background-color: #ffffff;
+    background-color: #023047;  /* Azul oscuro para el fondo */
 }
-.nav-menu{
+
+.nav-menu {
     display: flex;
     gap: 1rem;
 }
 
-.nav-menu a{
-    color: black;
+.nav-menu a {
+    color: #ffffff;  /* Blanco para los enlaces */
     text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
-.nav-menu a:hover{
-    color: #007B44;
+.nav-menu a:hover {
+    color: #ffb703;  /* Amarillo dorado en el hover */
 }
 
-
-
-.logo-text{
-    color: #007B44;
-    font-size: 1.5rem;
+.logo-text {
+    color: #fb8500;  /* Naranja vibrante para el logo */
+    font-size: 1.8rem;
     text-transform: uppercase;
     font-weight: bold;
 }
 
-.nav-right{
+.nav-right {
     display: flex;
     gap: 1rem;
 }
 
-.nav-right a{
-    color: black;
+.nav-right a {
+    color: #8ecae6;  /* Azul claro para los enlaces */
     text-decoration: none;
-    font-weight:bold;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
-.nav-right .opcion{
+.nav-right .opcion {
     font-weight: 500;
-    font-size: 17px;
-    color: #007B44;
+    font-size: 1.1rem;
+    color: #219ebc;  /* Azul intenso para los botones */
 }
 
-.nav-right .opcion:hover{
-    color: black;
+.nav-right .opcion:hover {
+    color: #fb8500;  /* Naranja brillante en hover */
 }
 
-#iniciar-sesion{
-    border: 2px solid #007B44;
-    color: #007B44;
+#iniciar-sesion {
+    border: 2px solid #fb8500;  /* Naranja brillante para el borde */
+    color: #fb8500;  /* Naranja brillante */
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 1rem;
 }
 
-#registro{
-    background-color: #007B44;
+#registro {
+    background-color: #219ebc;  /* Azul intenso para el fondo */
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -73,15 +73,12 @@
 }
 
 #iniciar-sesion:hover {
-  background-color: #3F9C72; /* verde más clarito */
-  color: #fff;
-  border-color: #3F9C72;
+    background-color: #8ecae6; /* Azul claro en el hover */
+    color: #fff;
+    border-color: #8ecae6;  /* Azul claro */
 }
 
 #registro:hover {
-  background-color: #3F9C72; /* verde más clarito */
-  color: #fff;
+    background-color: #023047;  /* Azul oscuro en el hover */
+    color: #fff;
 }
-
-
-
