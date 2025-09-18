@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($page_title) ? $page_title . ' - ' : ''; ?>Mini Chic - Ropa de Bebé</title>
     
+    <link rel="stylesheet" href="/proyecto-01/assets/css/base.css">
     <link rel="stylesheet" href="/proyecto-01/assets/css/header.css">
     <link rel="stylesheet" href="/proyecto-01/assets/css/global.css">
 

@@ -50,7 +50,7 @@
 
     .item-total {
         font-weight: bold;
-        color: var(--primary-color);
+        color: black;
         margin-left: 1rem;
     }
 

@@ -191,9 +191,9 @@ include 'includes/admin_header.php';
                                  <?php else : ?>
                                      <?php foreach ($pedido['productos'] as $producto) : ?>
                                          <div class="product-item">
-                                             <img src="/proyecto-01/public/<?php echo htmlspecialchars($producto['imagen']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                                             <img src="/proyecto-01/public/<?php echo htmlspecialchars($producto['producto_imagen']); ?>" alt="<?php echo htmlspecialchars($producto['producto_nombre']); ?>">
                                              <div class="product-info">
-                                                 <?php echo htmlspecialchars($producto['nombre']); ?>
+                                                 <?php echo htmlspecialchars($producto['producto_nombre']); ?>
                                                  <small>Cantidad: <?php echo $producto['cantidad']; ?></small>
                                              </div>
                                              <div class="product-price">
