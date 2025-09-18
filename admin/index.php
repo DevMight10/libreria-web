@@ -11,6 +11,8 @@ $page_title = 'Panel de Administración';
 $total_productos = $pdo->query("SELECT COUNT(*) FROM productos WHERE activo = 1")->fetchColumn();
 $pedidos_pendientes = $pdo->query("SELECT COUNT(*) FROM pedidos WHERE estado = 'pendiente'")->fetchColumn();
 $mensajes_nuevos = $pdo->query("SELECT COUNT(*) FROM mensajes WHERE leido = 0")->fetchColumn();
+$total_categorias = $pdo->query("SELECT COUNT(*) FROM categorias")->fetchColumn();
+
 
 // --- Ventas últimos 7 días ---
 $ventas_stmt = $pdo->query("
@@ -47,7 +49,7 @@ include 'includes/admin_header.php';
 
     <div class="admin-stats">
         <div class="stat-card">
-            <h3><?= count($ultimos_pedidos) ?></h3>
+            <h3><?= $total_categorias ?></h3>
             <p>Categorías</p>
             <a href="categorias.php" class="btn btn-primary">Ver Categorías</a>
         </div>

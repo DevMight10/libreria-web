@@ -5,12 +5,28 @@ require_once 'includes/functions.php';
 
 $page_title = 'Productos';
 
+// Notificación
+$mensaje = $_GET['mensaje'] ?? null;
+$tipo_mensaje = $mensaje ? (strpos($mensaje, 'stock') !== false ? 'error' : 'success') : '';
+
 // Filtro por categoría
 $categoria_filtro = isset($_GET['categoria']) ? $_GET['categoria'] : '';
-$where_clause = "WHERE p.activo = 1";
+$buscar_filtro = isset($_GET['buscar']) ? $_GET['buscar'] : '';
+
+$where_conditions = ['p.activo = 1'];
+$params = [];
+
 if ($categoria_filtro) {
-    $where_clause .= " AND p.categoria_id = :categoria";
+    $where_conditions[] = "p.categoria_id = :categoria";
+    $params[':categoria'] = $categoria_filtro;
 }
+
+if ($buscar_filtro) {
+    $where_conditions[] = "(p.nombre LIKE :buscar OR p.descripcion LIKE :buscar)";
+    $params[':buscar'] = "%{$buscar_filtro}%";
+}
+
+$where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
 
 $sql = "SELECT p.*, c.nombre as categoria_nombre 
         FROM productos p 
@@ -19,17 +35,12 @@ $sql = "SELECT p.*, c.nombre as categoria_nombre
         ORDER BY p.fecha_creacion DESC";
 
 $stmt = $pdo->prepare($sql);
-if ($categoria_filtro) {
-    $stmt->bindParam(':categoria', $categoria_filtro);
-}
-$stmt->execute();
+$stmt->execute($params);
 $productos = $stmt->fetchAll();
 
 // Obtener categorías para filtro
 $stmt_cat = $pdo->query("SELECT * FROM categorias ORDER BY nombre");
 $categorias = $stmt_cat->fetchAll();
-
-
 
 include 'includes/header.php';
 ?>
@@ -50,6 +61,14 @@ include 'includes/header.php';
         <?php endif; ?>
 
         <h1>Nuestros Productos</h1>
+
+        <!-- Búsqueda -->
+        <div class="search-bar">
+            <form action="productos.php" method="GET">
+                <input type="text" name="buscar" placeholder="Buscar productos..." value="<?php echo htmlspecialchars($buscar_filtro); ?>">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
 
         <!-- Filtros -->
         <div class="filters">

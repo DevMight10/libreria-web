@@ -56,13 +56,20 @@
 
 /* Icono chevron */
 .accordion-header .fa-chevron-down{ transition: transform .18s ease; }
-.accordion-item.open .fa-chevron-down,
-.accordion-item [aria-expanded="true"] .fa-chevron-down{ transform: rotate(180deg); }
+.accordion-header.active .fa-chevron-down{ transform: rotate(180deg); }
 
 /* Contenido del acordeón (colapsado por defecto) */
-.accordion-content{ display:none; padding: 0 16px 14px; background:#fff; }
-.accordion-item.open .accordion-content,
-.accordion-item [aria-expanded="true"] + .accordion-content{ display:block; }
+.accordion-content{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  padding: 0 16px; /* El padding vertical se gestionará con el contenido interno */
+  background: #fff;
+}
+.accordion-header.active + .accordion-content {
+    padding: 14px 16px;
+}
+
 
 /* ====== Detalles internos ====== */
 .order-details-admin{ padding: 6px 0 0; }

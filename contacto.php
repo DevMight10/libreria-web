@@ -111,8 +111,6 @@ include 'includes/header.php';
     </div>
 </main>
 
-<style>
 
-</style>
 
 <?php include 'includes/footer.php'; ?>

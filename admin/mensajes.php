@@ -13,32 +13,32 @@ if (empty($_SESSION['csrf_token'])) {
 $page_title = 'Ver Mensajes';
 
 // --- Lógica de Acciones ---
-
-// Acción de eliminar (vía POST)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] == 'eliminar') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar token CSRF
     if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
         die('Error de validación CSRF.');
     }
-    if (isset($_POST['id'])) {
-        $id_a_eliminar = $_POST['id'];
-        $stmt = $pdo->prepare("DELETE FROM mensajes WHERE id = ?");
-        if ($stmt->execute([$id_a_eliminar])) {
-            // Redirigir para limpiar la URL de la acción de eliminación
-            header("Location: mensajes.php?mensaje=Mensaje eliminado con éxito");
-            exit;
+
+    if (isset($_POST['accion'])) {
+        if ($_POST['accion'] == 'eliminar' && isset($_POST['id'])) {
+            $id_a_eliminar = $_POST['id'];
+            $stmt = $pdo->prepare("DELETE FROM mensajes WHERE id = ?");
+            if ($stmt->execute([$id_a_eliminar])) {
+                header("Location: mensajes.php?mensaje=Mensaje eliminado con éxito");
+                exit;
+            }
+        } elseif ($_POST['accion'] == 'marcar_leido' && isset($_POST['id'])) {
+            $id_a_marcar = $_POST['id'];
+            $stmt = $pdo->prepare("UPDATE mensajes SET leido = 1 WHERE id = ?");
+            $stmt->execute([$id_a_marcar]);
+            // No es necesario redirigir, la página se recargará y mostrará el estado actualizado
         }
     }
 }
 
-// Lógica para marcar como leído al expandir (vía GET)
-$expanded_id = null;
-if (isset($_GET['expand_id'])) {
-    $expanded_id = (int)$_GET['expand_id'];
-    // Marcar como leído en la BD
-    $stmt_mark_read = $pdo->prepare("UPDATE mensajes SET leido = 1 WHERE id = ?");
-    $stmt_mark_read->execute([$expanded_id]);
-}
+
+// Lógica para expandir un mensaje (vía GET)
+$expanded_id = isset($_GET['expand_id']) ? (int)$_GET['expand_id'] : null;
 
 
 // --- Lógica de Paginación, Búsqueda y Filtrado ---
@@ -50,7 +50,7 @@ $filtro = $_GET['filtro'] ?? 'todos';
 $buscar = $_GET['buscar'] ?? '';
 
 // Guardar los parámetros actuales para los enlaces
-$current_params = ['filtro' => $filtro, 'buscar' => $buscar, 'pagina' => $pagina_actual];
+$current_params = ['filtro' => $filtro, 'buscar' => $buscar];
 
 $where_conditions = [];
 $params = [];
@@ -84,6 +84,19 @@ $sql = "SELECT * FROM mensajes {$sql_where} ORDER BY fecha_envio DESC LIMIT {$me
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $mensajes = $stmt->fetchAll();
+
+// Función para generar enlaces de paginación
+function generar_paginacion($total_paginas, $pagina_actual, $params) {
+    if ($total_paginas <= 1) return '';
+    $html = '<div class="pagination">';
+    for ($i = 1; $i <= $total_paginas; $i++) {
+        $query_params = http_build_query(array_merge($params, ['pagina' => $i]));
+        $active_class = ($i == $pagina_actual) ? 'active' : '';
+        $html .= "<a href=\"?{$query_params}\" class=\"{$active_class}\">{$i}</a>";
+    }
+    $html .= '</div>';
+    return $html;
+}
 
 include 'includes/admin_header.php';
 ?>
@@ -150,9 +163,14 @@ include 'includes/admin_header.php';
                             <td><?php echo date('d/m/Y H:i', strtotime($mensaje['fecha_envio'])); ?></td>
                             <td><span class="badge badge-<?php echo $mensaje['leido'] ? 'leido' : 'nuevo'; ?>"><?php echo $mensaje['leido'] ? 'Leído' : 'Nuevo'; ?></span></td>
                             <td class="actions-cell">
-                                <a href="?<?php echo http_build_query($view_params); ?>" class="btn btn-sm btn-primary">
-                                    <?php echo $is_expanded ? 'Cerrar' : 'Ver'; ?>
-                                </a>
+                                <form action="mensajes.php?expand_id=<?php echo $mensaje['id']; ?>&<?php echo http_build_query($current_params); ?>" method="POST" style="display: inline;">
+                                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                                    <input type="hidden" name="id" value="<?php echo $mensaje['id']; ?>">
+                                    <input type="hidden" name="accion" value="marcar_leido">
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        <?php echo $is_expanded ? 'Cerrar' : 'Ver'; ?>
+                                    </button>
+                                </form>
                                 <form action="mensajes.php" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este mensaje?');">
                                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <input type="hidden" name="id" value="<?php echo $mensaje['id']; ?>">
@@ -163,7 +181,15 @@ include 'includes/admin_header.php';
                                 </form>
                             </td>
                         </tr>
-                        <?php if ($is_expanded): ?>
+                        <?php if ($is_expanded):
+                            // Si se expande un mensaje no leído, se marca como leído
+                            if (!$mensaje['leido']) {
+                                $stmt_mark_read = $pdo->prepare("UPDATE mensajes SET leido = 1 WHERE id = ?");
+                                $stmt_mark_read->execute([$expanded_id]);
+                                // Actualizar el estado en el array para que se refleje inmediatamente
+                                $mensaje['leido'] = 1;
+                            }
+                        ?>
                             <tr class="mensaje-expandido">
                                 <td colspan="6">
                                     <div class="mensaje-contenido-full">
@@ -183,16 +209,7 @@ include 'includes/admin_header.php';
     </div>
 
     <!-- Paginación -->
-    <div class="pagination">
-        <?php if ($total_paginas > 1): ?>
-            <?php 
-                $pagination_params = ['filtro' => $filtro, 'buscar' => $buscar];
-            ?>
-            <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
-                <a href="?pagina=<?php echo $i; ?>&<?php echo http_build_query($pagination_params); ?>" class="<?php echo ($i == $pagina_actual) ? 'active' : ''; ?>"><?php echo $i; ?></a>
-            <?php endfor; ?>
-        <?php endif; ?>
-    </div>
+    <?php echo generar_paginacion($total_paginas, $pagina_actual, $current_params); ?>
 </main>
 
 

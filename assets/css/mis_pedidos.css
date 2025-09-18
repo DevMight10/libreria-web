@@ -1,0 +1,23 @@
+.accordion { width: 100%; }
+.accordion-item { border-bottom: 1px solid #eee; }
+.accordion-header { background: #fff; border: none; width: 100%; padding: 1.5rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; }
+.accordion-header:hover { background: #f8f9fa; }
+.order-summary-info, .order-summary-status { display: flex; align-items: center; gap: 1.5rem; }
+.order-number { font-weight: bold; }
+.order-total { font-weight: bold; color: var(--primary-color); }
+.accordion-header i { transition: transform 0.3s; }
+.accordion-header.active i { transform: rotate(180deg); }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #fdfdfd; }
+.order-details { padding: 1.5rem; }
+.product-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #f0f0f0; }
+.product-item:last-child { border-bottom: none; }
+.product-item img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+.product-info { flex-grow: 1; }
+.product-info small { display: block; color: #6c757d; }
+.cancel-form { text-align: right; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;}
+.btn-danger { background-color: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; }
+.btn-danger:hover { background-color: #c82333; }
+.badge-pendiente { background-color: #ffc107; color: #333; }
+.badge-en_proceso { background-color: #17a2b8; color: white; }
+.badge-entregado { background-color: #28a745; color: white; }
+.badge-cancelado { background-color: #6c757d; color: white; }

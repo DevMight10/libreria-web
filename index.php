@@ -22,7 +22,7 @@ include 'includes/header.php';
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Ropa adorable para tu <h1 style="color : #007B44">pequeno tesoro</h1> </h1>
+                <h1>Ropa adorable para tu <span style="color : #007B44">pequeno tesoro</span> </h1>
                 <p>Descubre nuestra colección de ropa para bebés, diseñada con amor y fabricada con los materiales más suaves y seguros.</p>
                 <div>
                     <a href="productos.php" class="btn">Ver Productos</a>
@@ -38,6 +38,15 @@ include 'includes/header.php';
                 <p>La mejor ropa para tu bebé con amor y cuidado dsfa </p>
                 <a href="productos.php" class="btn btn-primary">Ver Productos</a>
             </div> -->
+        </div>
+    </section>
+
+    <section class="search-section">
+        <div class="container">
+            <form action="productos.php" method="GET" class="search-form">
+                <input type="text" name="buscar" placeholder="¿Qué estás buscando?">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
         </div>
     </section>
 

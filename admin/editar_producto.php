@@ -51,38 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Si se sube una nueva imagen, aplicar validación
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
-        if (!isset($error)) { // Proceder solo si no hay errores previos
-            $allowed_types = ['image/jpeg', 'image/png'];
-            $max_size = 5 * 1024 * 1024; // 5 MB
-
-            // Validar tamaño
-            if ($_FILES['imagen']['size'] > $max_size) {
-                $error = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
-            } else {
-                // Validar tipo de archivo
-                $file_info = finfo_open(FILEINFO_MIME_TYPE);
-                $mime_type = finfo_file($file_info, $_FILES['imagen']['tmp_name']);
-                finfo_close($file_info);
-
-                if (!in_array($mime_type, $allowed_types)) {
-                    $error = "Tipo de archivo no permitido. Solo se aceptan imágenes JPG y PNG.";
-                } else {
-                    // Crear un nombre de archivo único y seguro
-                    $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-                    $nombre_archivo = uniqid('prod_') . '.' . strtolower($extension);
-                    $ruta_archivo = '../public/' . $nombre_archivo;
-
-                    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta_archivo)) {
-                        // Eliminar la imagen anterior si existe
-                        if (!empty($producto['imagen']) && file_exists('../public/' . $producto['imagen'])) {
-                            unlink('../public/' . $producto['imagen']);
-                        }
-                        $imagen = $nombre_archivo;
-                    } else {
-                        $error = "Error al mover el archivo subido.";
-                    }
-                }
+        $nueva_imagen = uploadImage($_FILES['imagen'], $error);
+        if ($nueva_imagen) {
+            // Eliminar la imagen anterior si existe
+            if (!empty($producto['imagen']) && file_exists('../public/' . $producto['imagen'])) {
+                unlink('../public/' . $producto['imagen']);
             }
+            $imagen = $nueva_imagen;
         }
     }
 

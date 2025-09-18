@@ -15,6 +15,37 @@ main .container{
   padding: 20px 0 10px;
 }
 
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar form {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #007B44;
+    background-color: #007B44;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    outline: none;
+}
+
 /* Tarjeta */
 .product-card{
   background: #fff;

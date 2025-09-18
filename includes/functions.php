@@ -42,4 +42,34 @@ function addToCart($producto_id, $nombre, $precio, $imagen, $stock, $cantidad = 
 function formatOrderStatus($status) {
     return ucfirst(str_replace('_', ' ', $status));
 }
+
+function uploadImage($file, &$error) {
+    $allowed_types = ['image/jpeg', 'image/png'];
+    $max_size = 5 * 1024 * 1024; // 5 MB
+
+    if ($file['size'] > $max_size) {
+        $error = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
+        return null;
+    }
+
+    $file_info = finfo_open(FILEINFO_MIME_TYPE);
+    $mime_type = finfo_file($file_info, $file['tmp_name']);
+    finfo_close($file_info);
+
+    if (!in_array($mime_type, $allowed_types)) {
+        $error = "Tipo de archivo no permitido. Solo se aceptan imágenes JPG y PNG.";
+        return null;
+    }
+
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $nombre_archivo = uniqid('prod_') . '.' . strtolower($extension);
+    $ruta_archivo = '../public/' . $nombre_archivo;
+
+    if (move_uploaded_file($file['tmp_name'], $ruta_archivo)) {
+        return $nombre_archivo;
+    } else {
+        $error = "Error al mover el archivo subido.";
+        return null;
+    }
+}
 ?>

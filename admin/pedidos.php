@@ -51,10 +51,7 @@
     }
 
     // --- Lógica de Paginación, Búsqueda y Filtrado ---
-    $numero_de_pedidos_por_pagina = 5;
-
-    //don't touch this, it's magic
-    $pedidos_por_pagina = $numero_de_pedidos_por_pagina + 1;
+    $pedidos_por_pagina = 10;
     $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
     $offset = ($pagina_actual - 1) * $pedidos_por_pagina;
 
@@ -80,7 +77,7 @@
     }
 
     // Contar total de pedidos para la paginación
-    $stmt_count = $pdo->prepare("SELECT COUNT(DISTINCT p.id) FROM pedidos p {$sql_where}");
+    $stmt_count = $pdo->prepare("SELECT COUNT(*) FROM pedidos p {$sql_where}");
     $stmt_count->execute($params);
     $total_pedidos = $stmt_count->fetchColumn();
     $total_paginas = ceil($total_pedidos / $pedidos_por_pagina);
@@ -88,49 +85,31 @@
     // Consulta para traer pedidos de la página actual
     $sql = "
     SELECT 
-        p.id as pedido_id, p.numero_pedido, p.fecha_pedido, p.total, p.estado,
-        u.nombre as cliente_nombre, u.email as cliente_email,
-        pd.cantidad, pd.precio_unitario,
-        pr.nombre as producto_nombre, pr.imagen as producto_imagen
+        p.*,
+        u.nombre as cliente_nombre, u.email as cliente_email
     FROM pedidos p
     JOIN usuarios u ON p.usuario_id = u.id
-    LEFT JOIN pedido_detalles pd ON p.id = pd.pedido_id
-    LEFT JOIN productos pr ON pd.producto_id = pr.id
     {$sql_where}
-    GROUP BY p.id, pr.id
-    ORDER BY p.fecha_pedido DESC, p.id ASC
+    ORDER BY p.fecha_pedido DESC
     LIMIT {$pedidos_por_pagina} OFFSET {$offset}
 ";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Agrupar productos por pedido
-    $pedidos = [];
-    foreach ($results as $row) {
-        $pedido_id = $row['pedido_id'];
-        if (!isset($pedidos[$pedido_id])) {
-            $pedidos[$pedido_id] = [
-                'id' => $pedido_id,
-                'numero_pedido' => $row['numero_pedido'],
-                'fecha_pedido' => $row['fecha_pedido'],
-                'total' => $row['total'],
-                'estado' => $row['estado'],
-                'cliente_nombre' => $row['cliente_nombre'],
-                'cliente_email' => $row['cliente_email'],
-                'productos' => []
-            ];
-        }
-        if ($row['producto_nombre']) {
-            $pedidos[$pedido_id]['productos'][] = [
-                'nombre' => $row['producto_nombre'],
-                'imagen' => $row['producto_imagen'],
-                'cantidad' => $row['cantidad'],
-                'precio_unitario' => $row['precio_unitario']
-            ];
-        }
+    // Para cada pedido, obtener sus detalles
+    foreach ($pedidos as &$pedido) {
+        $stmt_detalles = $pdo->prepare("
+            SELECT pd.*, pr.nombre as producto_nombre, pr.imagen as producto_imagen
+            FROM pedido_detalles pd
+            JOIN productos pr ON pd.producto_id = pr.id
+            WHERE pd.pedido_id = ?
+        ");
+        $stmt_detalles->execute([$pedido['id']]);
+        $pedido['productos'] = $stmt_detalles->fetchAll(PDO::FETCH_ASSOC);
     }
+    unset($pedido); // Romper la referencia
 
 include 'includes/admin_header.php';
 ?>
