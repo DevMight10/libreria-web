@@ -16,7 +16,7 @@ class UsuarioModel {
     }
 
     public function find($id) {
-        $stmt = $this->pdo->prepare("SELECT id, nombre, email, tipo FROM usuarios WHERE id = ?");
+        $stmt = $this->pdo->prepare("SELECT id, nombre, email, tipo, foto_perfil, password_actualizado_en FROM usuarios WHERE id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -29,12 +29,17 @@ class UsuarioModel {
         return $stmt->execute([$tipo, $id]);
     }
 
-    public function update($id, $data) {
-        if (empty($data['nombre']) || !in_array($data['tipo'], ['cliente', 'admin'])) {
+    public function updateProfileInfo($id, $nombre) {
+        if (empty($nombre)) {
             return false;
         }
-        $stmt = $this->pdo->prepare("UPDATE usuarios SET nombre = ?, tipo = ? WHERE id = ?");
-        return $stmt->execute([$data['nombre'], $data['tipo'], $id]);
+        $stmt = $this->pdo->prepare("UPDATE usuarios SET nombre = ? WHERE id = ?");
+        return $stmt->execute([$nombre, $id]);
+    }
+
+    public function updateProfilePicture($id, $path) {
+        $stmt = $this->pdo->prepare("UPDATE usuarios SET foto_perfil = ? WHERE id = ?");
+        return $stmt->execute([$path, $id]);
     }
 
     public function delete($id) {
@@ -50,7 +55,7 @@ class UsuarioModel {
     }
 
     public function changePassword($id, $new_password_hash) {
-        $stmt = $this->pdo->prepare("UPDATE usuarios SET password = ? WHERE id = ?");
+        $stmt = $this->pdo->prepare("UPDATE usuarios SET password = ?, password_actualizado_en = NOW() WHERE id = ?");
         return $stmt->execute([$new_password_hash, $id]);
     }
 }

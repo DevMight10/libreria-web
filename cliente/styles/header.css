@@ -82,6 +82,19 @@
   background-color: #3F9C72; /* verde más clarito */
   color: #fff;
 }
+.profile-link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.profile-link-container .opcion {
+    display: flex;
+    flex-direction: column; /* columna: texto arriba, nombre abajo */
+    align-items: center;    /* centra horizontalmente */
+    font-weight: 500;
+}
 
-
+.profile-link-container .user-name {
+    font-size: 0.85em;
+}

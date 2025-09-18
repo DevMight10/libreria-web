@@ -8,7 +8,9 @@ CREATE TABLE usuarios (
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     tipo ENUM('cliente', 'admin') DEFAULT 'cliente',
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    foto_perfil VARCHAR(255) NULL DEFAULT NULL,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    password_actualizado_en TIMESTAMP NULL DEFAULT NULL
 );
 
 -- Tabla de categorías
