@@ -9,6 +9,19 @@ class ProductoModel {
     public function getAll($filtros = []) {
         $where_conditions = [];
         $params = [];
+        $limit_sql = '';
+
+        // Filtro para productos activos (para la tienda)
+        if (isset($filtros['activo'])) {
+            $where_conditions[] = 'p.activo = ?';
+            $params[] = $filtros['activo'];
+        }
+
+        // Filtro para productos destacados
+        if (isset($filtros['destacado'])) {
+            $where_conditions[] = 'p.destacado = ?';
+            $params[] = $filtros['destacado'];
+        }
 
         // Filtro por categoría
         if (!empty($filtros['categoria_id']) && $filtros['categoria_id'] !== 'todos') {
@@ -28,11 +41,16 @@ class ProductoModel {
             $sql_where = 'WHERE ' . implode(' AND ', $where_conditions);
         }
 
+        if (isset($filtros['limit'])) {
+            $limit_sql = 'LIMIT ' . (int)$filtros['limit'];
+        }
+
         $sql = "SELECT p.*, c.nombre as categoria_nombre
                 FROM productos p
                 LEFT JOIN categorias c ON p.categoria_id = c.id
                 {$sql_where}
-                ORDER BY p.fecha_creacion DESC";
+                ORDER BY p.fecha_creacion DESC
+                {$limit_sql}";
         
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
@@ -45,7 +63,11 @@ class ProductoModel {
     }
 
     public function find($id) {
-        $stmt = $this->pdo->prepare("SELECT * FROM productos WHERE id = ?");
+        $sql = "SELECT p.*, c.nombre as categoria_nombre 
+                FROM productos p
+                LEFT JOIN categorias c ON p.categoria_id = c.id
+                WHERE p.id = ?";
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch();
     }

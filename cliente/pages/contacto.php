@@ -1,34 +1,18 @@
 <?php
-require_once '../../config/database.php';
-require_once '../../auth/session.php';
-require_once '../../auth/functions.php';
+// 1. Incluir el controlador
+require_once '../controllers/contacto_controller.php';
 
-$page_title = 'Contacto';
-$mensaje = '';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombre = $_POST['nombre'];
-    $email = $_POST['email'];
-    $asunto = $_POST['asunto'];
-    $mensaje_texto = $_POST['mensaje'];
-    
-    $stmt = $pdo->prepare("INSERT INTO mensajes (nombre, email, asunto, mensaje) VALUES (?, ?, ?, ?)");
-    
-    if ($stmt->execute([$nombre, $email, $asunto, $mensaje_texto])) {
-        $mensaje = 'Mensaje enviado exitosamente. Te responderemos pronto.';
-    } else {
-        $mensaje = 'Error al enviar el mensaje. Inténtalo nuevamente.';
-    }
-}
-
+// 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
 
+<!-- 3. Link al CSS -->
 <link rel="stylesheet" href="/proyecto-01/cliente/styles/contacto.css">
 
+<!-- 4. Contenido HTML -->
 <main>
     <div class="container">
-        <h1>Contacto</h1>
+        <h1><?php echo $page_title; ?></h1>
         
         <div class="contact-content">
             <div class="contact-info">
@@ -40,7 +24,6 @@ include '../../public/componentes/header.php';
                         <p>Satélite Norte, La Paz - Bolivia</p>
                     </div>
                 </div>
-                
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
                     <div>
@@ -48,7 +31,6 @@ include '../../public/componentes/header.php';
                         <p>+591 2 123-4567</p>
                     </div>
                 </div>
-                
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
                     <div>
@@ -56,7 +38,6 @@ include '../../public/componentes/header.php';
                         <p>info@minichic.com</p>
                     </div>
                 </div>
-                
                 <div class="contact-item">
                     <i class="fas fa-clock"></i>
                     <div>
@@ -76,17 +57,15 @@ include '../../public/componentes/header.php';
                     </div>
                 <?php endif; ?>
                 
-                <form method="POST">
+                <form action="/proyecto-01/cliente/pages/contacto.php" method="POST">
                     <div class="form-group">
                         <label for="nombre">Nombre Completo:</label>
                         <input type="text" id="nombre" name="nombre" required>
                     </div>
-                    
                     <div class="form-group">
                         <label for="email">Correo Electrónico:</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-                    
                     <div class="form-group">
                         <label for="asunto">Asunto:</label>
                         <select id="asunto" name="asunto" required>
@@ -98,12 +77,10 @@ include '../../public/componentes/header.php';
                             <option value="Otro">Otro</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
                         <label for="mensaje">Mensaje:</label>
                         <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
                     </div>
-                    
                     <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
                 </form>
             </div>
@@ -111,6 +88,7 @@ include '../../public/componentes/header.php';
     </div>
 </main>
 
-
-
-<?php include '../../public/componentes/footer.php'; ?>
+<?php
+// 5. Incluir el footer
+include '../../public/componentes/footer.php';
+?>

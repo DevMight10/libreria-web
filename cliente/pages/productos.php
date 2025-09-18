@@ -1,67 +1,28 @@
 <?php
-require_once '../../config/database.php';
-require_once '../../auth/session.php';
-require_once '../../auth/functions.php';
+// 1. Incluir el controlador
+require_once '../controllers/productos_controller.php';
 
-$page_title = 'Productos';
-
-// Notificación
-$mensaje = $_GET['mensaje'] ?? null;
-$tipo_mensaje = $mensaje ? (strpos($mensaje, 'stock') !== false ? 'error' : 'success') : '';
-
-// Filtro por categoría
-$categoria_filtro = isset($_GET['categoria']) ? $_GET['categoria'] : '';
-$buscar_filtro = isset($_GET['buscar']) ? $_GET['buscar'] : '';
-
-$where_conditions = ['p.activo = 1'];
-$params = [];
-
-if ($categoria_filtro) {
-    $where_conditions[] = "p.categoria_id = :categoria";
-    $params[':categoria'] = $categoria_filtro;
-}
-
-if ($buscar_filtro) {
-    $where_conditions[] = "(p.nombre LIKE :buscar OR p.descripcion LIKE :buscar)";
-    $params[':buscar'] = "%{$buscar_filtro}%";
-}
-
-$where_clause = 'WHERE ' . implode(' AND ', $where_conditions);
-
-$sql = "SELECT p.*, c.nombre as categoria_nombre 
-        FROM productos p 
-        LEFT JOIN categorias c ON p.categoria_id = c.id 
-        $where_clause 
-        ORDER BY p.fecha_creacion DESC";
-
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
-$productos = $stmt->fetchAll();
-
-// Obtener categorías para filtro
-$stmt_cat = $pdo->query("SELECT * FROM categorias ORDER BY nombre");
-$categorias = $stmt_cat->fetchAll();
-
+// 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
 
+<!-- 3. Link al CSS -->
 <link rel="stylesheet" href="/proyecto-01/cliente/styles/lista-productos.css">
 
+<!-- 4. Contenido HTML -->
 <main>
     <div class="container">
-        <?php if (isset($_GET['mensaje'])): ?>
+        <?php if ($mensaje): ?>
             <?php
-            // Si el mensaje contiene "No hay suficiente stock" lo ponemos en rojo
-            $tipo = strpos($_GET['mensaje'], 'stock') !== false ? 'error' : 'success';
+            $tipo = (stripos($mensaje, 'stock') !== false || stripos($mensaje, 'no hay suficiente') !== false) ? 'error' : 'success';
             ?>
             <div class="notificacion <?php echo $tipo; ?>">
-                <?php echo htmlspecialchars($_GET['mensaje']); ?>
+                <?php echo htmlspecialchars($mensaje); ?>
             </div>
         <?php endif; ?>
 
         <h1>Nuestros Productos</h1>
 
-        <!-- Búsqueda -->
         <div class="search-bar">
             <form action="/proyecto-01/cliente/pages/productos.php" method="GET">
                 <input type="text" name="buscar" placeholder="Buscar productos..." value="<?php echo htmlspecialchars($buscar_filtro); ?>">
@@ -69,7 +30,6 @@ include '../../public/componentes/header.php';
             </form>
         </div>
 
-        <!-- Filtros -->
         <div class="filters">
             <a href="/proyecto-01/cliente/pages/productos.php" class="filter-btn <?php echo !$categoria_filtro ? 'active' : ''; ?>">
                 Todos
@@ -82,64 +42,58 @@ include '../../public/componentes/header.php';
             <?php endforeach; ?>
         </div>
 
-        <!-- Grid de productos -->
         <div class="products-grid">
-            <?php foreach ($productos as $producto): ?>
-                <div class="product-card">
-                    <img src="/proyecto-01/public/<?php echo $producto['imagen']; ?>"
-                        alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
-                    <div class="product-info">
-                        <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
-                        <p class="category"><?php echo htmlspecialchars($producto['categoria_nombre']); ?></p>
-                        <p class="price"><?php echo formatPrice($producto['precio']); ?></p>
-                        <p class="stock <?php echo ($producto['stock'] <= 5 && $producto['stock'] > 0) ? 'low-stock' : ''; ?>">
-                            <?php
-                            if ($producto['stock'] > 0) {
-                                echo 'Disponibles: ' . $producto['stock'];
-                            } else {
-                                echo '<span class="out-of-stock">Agotado</span>';
-                            }
-                            ?>
-                        </p>
-                        <div class="product-actions">
-                            <a href="/proyecto-01/cliente/pages/producto_detalle.php?id=<?php echo $producto['id']; ?>"
-                                class="btn btn-secondary">Ver Detalles</a>
-                            <?php if (isLoggedIn()): ?>
-                                <?php if ($producto['stock'] > 0): ?>
-                                    <a href="/proyecto-01/cliente/pages/agregar_al_carrito.php?id=<?php echo $producto['id']; ?>"
-                                        class="btn btn-primary">
-                                        <i class="fas fa-cart-plus"></i> Agregar
-                                    </a>
+            <?php if (empty($productos)): ?>
+                <p>No se encontraron productos que coincidan con tu búsqueda.</p>
+            <?php else: ?>
+                <?php foreach ($productos as $producto): ?>
+                    <div class="product-card">
+                        <img src="/proyecto-01/public/<?php echo $producto['imagen']; ?>"
+                            alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                        <div class="product-info">
+                            <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
+                            <p class="category"><?php echo htmlspecialchars($producto['categoria_nombre']); ?></p>
+                            <p class="price"><?php echo formatPrice($producto['precio']); ?></p>
+                            <p class="stock <?php echo ($producto['stock'] <= 5 && $producto['stock'] > 0) ? 'low-stock' : ''; ?>">
+                                <?php
+                                if ($producto['stock'] > 0) {
+                                    echo 'Disponibles: ' . $producto['stock'];
+                                } else {
+                                    echo '<span class="out-of-stock">Agotado</span>';
+                                }
+                                ?>
+                            </p>
+                            <div class="product-actions">
+                                <a href="/proyecto-01/cliente/pages/producto_detalle.php?id=<?php echo $producto['id']; ?>"
+                                    class="btn btn-secondary">Ver Detalles</a>
+                                <?php if (isLoggedIn()): ?>
+                                    <?php if ($producto['stock'] > 0): ?>
+                                        <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" style="display: inline;">
+                                            <input type="hidden" name="action" value="add">
+                                            <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
+                                            <input type="hidden" name="return_url" value="/proyecto-01/cliente/pages/productos.php?<?php echo http_build_query($_GET); ?>">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-cart-plus"></i> Agregar
+                                            </button>
+                                        </form>
+                                    <?php else: ?>
+                                        <button class="btn btn-primary" disabled>Agotado</button>
+                                    <?php endif; ?>
                                 <?php else: ?>
-                                    <button class="btn btn-primary" disabled>Agotado</button>
+                                    <a href="/proyecto-01/auth/login.php" class="btn btn-primary">Inicia sesión para comprar</a>
                                 <?php endif; ?>
-                            <?php else: ?>
-                                <a href="/proyecto-01/auth/login.php" class="btn btn-primary">Inicia sesión para comprar</a>
-                            <?php endif; ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </main>
 
-<?php include '../../public/componentes/footer.php'; ?>
-
 <?php
-// Mostrar mensaje de carrito si existe en la URL
-if (isset($_GET['mensaje'])) {
-    $mensaje = $_GET['mensaje'];
-
-    // Determinar tipo: rojo si contiene "stock", verde si contiene "agregado"
-    $tipo = (stripos($mensaje, 'stock') !== false || stripos($mensaje, 'no hay suficiente') !== false) ? 'error' : 'success';
-
-    echo '<div class="notificacion ' . $tipo . '">';
-    echo htmlspecialchars($mensaje);
-    echo '</div>';
-}
-
-
+// 5. Incluir el footer
+include '../../public/componentes/footer.php';
 ?>
 
 <style>
@@ -148,17 +102,8 @@ if (isset($_GET['mensaje'])) {
         margin: 1rem 0;
         border-radius: 5px;
         font-weight: bold;
-    }
-
-    .notificacion.success {
-        background-color: #28a745;
-        /* verde */
         color: #fff;
     }
-
-    .notificacion.error {
-        background-color: #dc3545;
-        /* rojo */
-        color: #fff;
-    }
+    .notificacion.success { background-color: #28a745; }
+    .notificacion.error { background-color: #dc3545; }
 </style>

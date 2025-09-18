@@ -1,22 +1,16 @@
 <?php
-require_once '../../config/database.php';
-require_once '../../auth/session.php';
-require_once '../../auth/functions.php';
+// 1. Incluir el controlador
+require_once '../controllers/index_controller.php';
 
-$page_title = 'Inicio';
-
-// Obtener productos destacados
-$stmt = $pdo->query("SELECT * FROM productos WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 6");
-$productos_destacados = $stmt->fetchAll();
-
+// 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
 
+<!-- 3. Link al CSS -->
 <link rel="stylesheet" href="/proyecto-01/cliente/styles/home.css">
 
-
-<main >
-    <!-- Hero Section -->
+<!-- 4. Contenido HTML -->
+<main>
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -25,9 +19,7 @@ include '../../public/componentes/header.php';
                 <div>
                     <a href="/proyecto-01/cliente/pages/productos.php" class="btn">Ver Productos</a>
                 </div>
-
             </div>
-
             <div class="hero-img">
                 <img src="/proyecto-01/public/imgs/bebe.jpg" alt="hero">
             </div>
@@ -50,13 +42,11 @@ include '../../public/componentes/header.php';
                 <h3>Envío Gratuito</h3>
                 <p>En compras mayores a Bs500</p>
             </div>
-
             <div class="feature">
                 <span class="icon"><i class="fa-solid fa-shield"></i></span>
                 <h3>Materiales Seguros</h3>
                 <p>Algodón orgánico, sin químicos</p>
             </div>
-
             <div class="feature">
                 <span class="icon"><i class="fa-solid fa-clock"></i></span>
                 <h3>Atención 24/7</h3>
@@ -65,15 +55,13 @@ include '../../public/componentes/header.php';
         </div>
     </section>
 
-
-    <!-- Productos Destacados -->
     <section class="featured-products">
         <div class="container">
             <h2 style="text-align: center;">Productos Destacados</h2>
             <div class="products-grid">
                 <?php foreach ($productos_destacados as $producto): ?>
                     <div class="product-card">
-                        <img src="/proyecto-01/public/<?php echo $producto['imagen']; ?>" 
+                        <img src="/proyecto-01/public/<?php echo htmlspecialchars($producto['imagen']); ?>" 
                              alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
                         <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
                         <p class="price"><?php echo formatPrice($producto['precio']); ?></p>
@@ -85,4 +73,7 @@ include '../../public/componentes/header.php';
     </section>
 </main>
 
-<?php include '../../public/componentes/footer.php'; ?>
+<?php
+// 5. Incluir el footer
+include '../../public/componentes/footer.php';
+?>

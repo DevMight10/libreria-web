@@ -1,89 +1,18 @@
 <?php
-require_once '../../config/database.php';
-require_once '../../auth/session.php';
-require_once '../../auth/functions.php';
+// 1. Incluir el controlador
+require_once '../controllers/confirmar_pedido_controller.php';
 
-requireLogin();
-
-$page_title = 'Confirmar Pedido';
-
-if (empty($_SESSION['carrito'])) {
-    header('Location: /proyecto-01/cliente/pages/productos.php');
-    exit();
-}
-
-$mensaje = '';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirmar_pedido'])) {
-    
-    // 1. Pre-confirmación de stock
-    $errores_stock = [];
-    foreach ($_SESSION['carrito'] as $producto_id => $item) {
-        $stmt_stock = $pdo->prepare("SELECT nombre, stock FROM productos WHERE id = ?");
-        $stmt_stock->execute([$producto_id]);
-        $producto_db = $stmt_stock->fetch();
-
-        if (!$producto_db || $item['cantidad'] > $producto_db['stock']) {
-            $errores_stock[] = "No hay suficiente stock para \"{$item['nombre']}\". Disponibles: " . ($producto_db['stock'] ?? 0) . ".";
-        }
-    }
-
-    if (!empty($errores_stock)) {
-        $_SESSION['mensaje_error'] = implode('<br>', $errores_stock);
-        header('Location: /proyecto-01/cliente/pages/carrito.php');
-        exit;
-    }
-
-    // 2. Procesar el pedido si hay stock
-    try {
-        $pdo->beginTransaction();
-        
-        // Crear pedido
-        $numero_pedido = generateOrderNumber();
-        $total = getCartTotal();
-        $usuario_id = $_SESSION['usuario_id'];
-        
-        $stmt = $pdo->prepare("INSERT INTO pedidos (usuario_id, numero_pedido, total) VALUES (?, ?, ?)");
-        $stmt->execute([$usuario_id, $numero_pedido, $total]);
-        $pedido_id = $pdo->lastInsertId();
-        
-        // Agregar detalles del pedido y actualizar stock
-        foreach ($_SESSION['carrito'] as $producto_id => $item) {
-            // Insertar detalle
-            $subtotal = $item['precio'] * $item['cantidad'];
-            $stmt_detalle = $pdo->prepare("INSERT INTO pedido_detalles (pedido_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, ?, ?, ?, ?)");
-            $stmt_detalle->execute([$pedido_id, $producto_id, $item['cantidad'], $item['precio'], $subtotal]);
-
-            // Actualizar stock
-            $stmt_stock_update = $pdo->prepare("UPDATE productos SET stock = stock - ? WHERE id = ?");
-            $stmt_stock_update->execute([$item['cantidad'], $producto_id]);
-        }
-        
-        $pdo->commit();
-        
-        // Limpiar carrito de la sesión
-        unset($_SESSION['carrito']);
-
-        // Limpiar carrito de la base de datos
-        $stmt_clear = $pdo->prepare("DELETE FROM carrito_items WHERE usuario_id = ?");
-        $stmt_clear->execute([$usuario_id]);
-        
-        $mensaje = "Pedido confirmado exitosamente. Número de pedido: $numero_pedido";
-        
-    } catch (Exception $e) {
-        $pdo->rollback();
-        $mensaje = "Error al procesar el pedido. Inténtalo nuevamente.";
-        // Opcional: loggear el error $e->getMessage()
-    }
-}
-
+// 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
+
+<!-- 3. Link al CSS -->
 <link rel="stylesheet" href="/proyecto-01/cliente/styles/confirmar_pedido.css">
 
+<!-- 4. Contenido HTML -->
 <main>
     <div class="container">
-        <h1>Confirmar Pedido</h1>
+        <h1><?php echo $page_title; ?></h1>
         
         <?php if ($mensaje): ?>
             <div class="alert <?php echo strpos($mensaje, 'exitosamente') !== false ? 'alert-success' : 'alert-error'; ?>">
@@ -102,9 +31,9 @@ include '../../public/componentes/header.php';
                 <h2>Resumen del Pedido</h2>
                 
                 <div class="order-items">
-                    <?php foreach ($_SESSION['carrito'] as $producto_id => $item): ?>
+                    <?php foreach ($carrito_items as $producto_id => $item): ?>
                         <div class="order-item">
-                            <img src="/proyecto-01/public/<?php echo $item['imagen']; ?>" 
+                            <img src="/proyecto-01/public/<?php echo htmlspecialchars($item['imagen']); ?>" 
                                  alt="<?php echo htmlspecialchars($item['nombre']); ?>">
                             <div class="item-details">
                                 <h3><?php echo htmlspecialchars($item['nombre']); ?></h3>
@@ -119,7 +48,7 @@ include '../../public/componentes/header.php';
                 </div>
                 
                 <div class="order-total">
-                    <h3>Total: <?php echo formatPrice(getCartTotal()); ?></h3>
+                    <h3>Total: <?php echo formatPrice($cart->getTotal()); ?></h3>
                 </div>
                 
                 <div class="order-info">
@@ -131,7 +60,7 @@ include '../../public/componentes/header.php';
                     </ul>
                 </div>
                 
-                <form method="POST" class="confirm-form">
+                <form action="/proyecto-01/cliente/pages/confirmar_pedido.php" method="POST" class="confirm-form">
                     <button type="submit" name="confirmar_pedido" class="btn btn-primary">
                         Confirmar Pedido
                     </button>
@@ -142,4 +71,7 @@ include '../../public/componentes/header.php';
     </div>
 </main>
 
-<?php include '../../public/componentes/footer.php'; ?>
+<?php
+// 5. Incluir el footer
+include '../../public/componentes/footer.php';
+?>

@@ -1,27 +1,8 @@
 <?php
-require_once '../../config/database.php';
-require_once '../../auth/session.php';
-require_once '../../auth/functions.php';
+// 1. Incluir el controlador
+require_once '../controllers/producto_detalle_controller.php';
 
-$producto_id = isset($_GET['id']) ? $_GET['id'] : 0;
-
-// Obtener producto
-$stmt = $pdo->prepare("SELECT p.*, c.nombre as categoria_nombre 
-                       FROM productos p 
-                       LEFT JOIN categorias c ON p.categoria_id = c.id 
-                       WHERE p.id = ? AND p.activo = 1");
-$stmt->execute([$producto_id]);
-$producto = $stmt->fetch();
-
-if (!$producto) {
-    header('Location: /proyecto-01/cliente/pages/productos.php');
-    exit();
-}
-
-$page_title = $producto['nombre'];
-
-
-
+// 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
 <link rel="stylesheet" href="/proyecto-01/cliente/styles/producto-detalle.css">
@@ -71,7 +52,8 @@ include '../../public/componentes/header.php';
 
                 <?php if (isLoggedIn()): ?>
                     <?php if ($producto['stock'] > 0): ?>
-                        <form action="/proyecto-01/cliente/pages/agregar_al_carrito.php" method="POST" class="add-to-cart-form">
+                        <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" class="add-to-cart-form">
+                            <input type="hidden" name="action" value="add">
                             <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
                             <input type="hidden" name="return_url" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
                             <div class="quantity-selector">
