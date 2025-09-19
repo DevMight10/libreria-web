@@ -1,59 +1,18 @@
+/* Paleta de colores:
+  Azul oscuro: #023047
+  Azul claro: #8ecae6
+*/
+
 .site-footer {
-  background-color: #343a40; /* Dark gray */
-  color: #f8f9fa; /* Light gray */
-  margin-top: 40px;
-  padding-top: 30px;
-  padding-bottom: 0;
-  font-size: 14px;
-}
-
-.footer-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.footer-col {
-  flex: 1;
-  min-width: 200px;
-}
-
-.footer-col h4 {
-  color: #ffffff;
-  font-size: 16px;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-}
-
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-col ul li {
-  margin-bottom: 10px;
-}
-
-.footer-col a {
-  color: #adb5bd; /* Lighter gray */
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.footer-col a:hover {
-  color: #ffffff;
-}
-
-.footer-col address {
-  font-style: normal;
-  line-height: 1.7;
-  color: #adb5bd;
+  /* Este estilo es un placeholder si el contenido es corto */
+  /* En una app real, se pegaría al fondo con otras técnicas */
+  margin-top: 4rem;
 }
 
 .footer-bottom {
+  background-color: #023047; /* Azul oscuro */
+  color: #8ecae6; /* Azul claro */
+  padding: 1.5rem 0;
   text-align: center;
-  padding: 20px 0;
-  margin-top: 20px;
-  border-top: 1px solid #495057; /* Separator line */
+  font-size: 0.9rem;
 }

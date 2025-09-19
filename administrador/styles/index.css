@@ -1,106 +1,125 @@
+/* Paleta de colores:
+  Azul oscuro: #023047
+  Azul claro: #8ecae6
+  Azul medio: #219ebc
+  Amarillo: #ffb703
+*/
+
 /* Estilos para el contenedor principal del panel */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+main.container {
+    background-color: #f8f9fa; /* Fondo gris claro */
+    padding: 2rem;
 }
 
 h1 {
     text-align: center;
     margin-bottom: 2rem;
+    color: #023047; /* Azul oscuro */
 }
 
-/* Contenedor de las tarjetas de estadísticas (con Flexbox) */
+/* Contenedor de las tarjetas de estadísticas */
 .admin-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
     margin-bottom: 2rem;
-    justify-content: center; /* Centra la última fila de items */
 }
 
 .stat-card {
-    flex: 1 1 220px; /* Controla el crecimiento y el tamaño base de las tarjetas */
     background-color: #fff;
-    padding: 25px;
+    padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    border-color: #219ebc; /* Azul medio */
 }
 
 .stat-card h3 {
     font-size: 2.5rem;
-    margin: 0 0 10px;
-    color: #333;
+    margin: 0 0 0.5rem;
+    color: #023047; /* Azul oscuro */
 }
 
 .stat-card p {
-    margin: 0 0 15px;
-    color: #666;
+    margin: 0 0 1rem;
+    color: #6c757d; /* Gris neutral */
+    flex-grow: 1;
 }
 
-/* Estilos para la gráfica de ventas */
-.chart-container {
+.stat-card a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #219ebc; /* Azul medio */
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.stat-card a:hover {
+    background-color: #e3f3ff;
+}
+
+/* Contenedores para gráfico y tabla */
+.chart-container,
+.recent-orders {
     background-color: #fff;
-    padding: 25px;
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
     margin-bottom: 2rem;
 }
 
-.chart-container h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #333;
-}
-
-/* Estilos para la tabla de pedidos recientes */
-.recent-orders {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
+.chart-container h2,
 .recent-orders h2 {
-    margin-bottom: 20px;
+    margin: 0 0 1.5rem;
+    color: #023047; /* Azul oscuro */
+    font-size: 1.5rem;
 }
 
+/* Tabla de pedidos recientes */
 .table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.95rem;
 }
 
-.table th, .table td {
-    padding: 12px;
+.table th,
+.table td {
+    padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .table th {
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Fondo gris claro para cabecera */
+    color: #023047; /* Azul oscuro */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
 }
 
 .table tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f4f8fa;
 }
 
-/* Badges */
+/* Etiquetas de estado */
 .badge {
-    padding: 4px 8px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: bold;
+    padding: 0.4em 0.8em;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
     text-transform: capitalize;
 }
 
-.badge-pendiente { background-color: #ffc107; color: #333; }
-.badge-en_proceso { background-color: #17a2b8; color: #fff; }
-.badge-entregado { background-color: #28a745; color: #fff; }
-.badge-cancelado { background-color: #dc3545; color: #fff; }
+.badge-pendiente { background-color: #ffb703; color: #333; } /* Amarillo */
+.badge-en_proceso { background-color: #8ecae6; color: #023047; } /* Azul claro */
+.badge-entregado { background-color: #219ebc; color: #fff; } /* Azul medio */
+.badge-cancelado { background-color: #e63946; color: #fff; } /* Rojo neutral */

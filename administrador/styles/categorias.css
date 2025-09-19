@@ -1,51 +1,73 @@
-/* Estructura principal de la página de categorías */
+/* Paleta de colores:
+  Azul oscuro: #023047
+  Azul medio: #219ebc
+*/
+
+main.container {
+    background-color: #f8f9fa;
+    padding: 2rem;
+}
+
+/* Estructura principal */
 .category-grid {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 30px;
+    gap: 2rem;
     align-items: flex-start;
 }
 
-/* Contenedor del formulario */
+/* Contenedores de tarjeta */
 .form-container,
 .table-responsive {
     background-color: #fff;
-    padding: 25px;
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
 }
 
 .form-container h2,
 .table-responsive h2 {
     margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.25rem;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #023047;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-/* Estilos para el formulario */
+/* Formulario */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #023047;
 }
 
 .form-control {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
     font-size: 1rem;
+    transition: border-color .2s, box-shadow .2s;
 }
 
-/* Estilos para la tabla */
+.form-control:focus {
+    outline: none;
+    border-color: #219ebc;
+    box-shadow: 0 0 0 4px rgba(33, 158, 188, 0.15);
+}
+
+.btn-primary {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+/* Tabla */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -53,45 +75,85 @@
 
 .table th,
 .table td {
-    padding: 12px 15px;
+    padding: 1rem;
     text-align: left;
     border-bottom: 1px solid #e0e0e0;
 }
 
 .table th {
     background-color: #f8f9fa;
-    font-weight: bold;
-    color: #333;
+    color: #023047;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
 }
 
 .table tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f4f8fa;
 }
 
-/* Celda de acciones */
+/* Celda de acciones y botones */
 .actions-cell-buttons {
     display: flex;
-    gap: 10px;
+    gap: 0.5rem;
     align-items: center;
+}
+
+.btn-sm {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #219ebc;
+    border-color: #219ebc;
+}
+.btn-secondary:hover {
+    background-color: #219ebc;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: transparent;
+    color: #e63946;
+    border-color: #e63946;
+}
+.btn-danger:hover {
+    background-color: #e63946;
+    color: #fff;
+}
+.btn-danger:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #ccc;
+    color: #ccc;
+}
+.btn-danger:disabled:hover {
+    background-color: transparent;
+    color: #ccc;
 }
 
 /* Alertas */
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
     border: 1px solid transparent;
+    font-weight: 600;
 }
 
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border-color: #c3e6cb;
+    background-color: #e3f3ff;
+    color: #023047;
+    border-color: #8ecae6;
 }
 
 .alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #fff0f1;
+    color: #e63946;
     border-color: #f5c6cb;
 }
 

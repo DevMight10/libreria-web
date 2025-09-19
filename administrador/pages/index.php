@@ -17,27 +17,27 @@ include '../../public/componentes/admin_header.php';
         <div class="stat-card">
             <h3><?= $stats['total_categorias'] ?></h3>
             <p>Categorías</p>
-            <a href="/proyecto-01/administrador/pages/categorias.php" class="btn btn-primary">Ver Categorías</a>
+            <a href="/proyecto-01/administrador/pages/categorias.php">Ver Categorías</a>
         </div>
         <div class="stat-card">
             <h3><?= $stats['total_productos'] ?></h3>
             <p>Productos Activos</p>
-            <a href="/proyecto-01/administrador/pages/productos.php" class="btn btn-primary">Gestionar</a>
+            <a href="/proyecto-01/administrador/pages/productos.php">Gestionar</a>
         </div>
         <div class="stat-card">
             <h3><?= $stats['pedidos_pendientes'] ?></h3>
             <p>Pedidos Pendientes</p>
-            <a href="/proyecto-01/administrador/pages/pedidos.php" class="btn btn-primary">Ver Pedidos</a>
+            <a href="/proyecto-01/administrador/pages/pedidos.php">Ver Pedidos</a>
         </div>
         <div class="stat-card">
             <h3><?= $stats['mensajes_nuevos'] ?></h3>
             <p>Mensajes Nuevos</p>
-            <a href="/proyecto-01/administrador/pages/mensajes.php" class="btn btn-primary">Ver Mensajes</a>
+            <a href="/proyecto-01/administrador/pages/mensajes.php">Ver Mensajes</a>
         </div>
         <div class="stat-card">
             <h3><?= $stats['total_usuarios'] ?></h3>
             <p>Usuarios</p>
-            <a href="/proyecto-01/administrador/pages/usuarios.php" class="btn btn-primary">Ver Usuarios</a>
+            <a href="/proyecto-01/administrador/pages/usuarios.php">Ver Usuarios</a>
         </div>
     </div>
 

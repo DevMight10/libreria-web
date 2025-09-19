@@ -1,160 +1,215 @@
-/* Estilos generales y filtros */
+/* Estilos Generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* Títulos */
+h1 {
+    color: #023047;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Barra de Filtros */
 .filters-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .filters {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
 }
 
 .filter-btn {
-    text-decoration: none;
+    background-color: #fb8500;
+    color: white;
     padding: 8px 15px;
-    border-radius: 20px;
-    background-color: #f1f1f1;
-    color: #555;
-    font-size: 14px;
-    transition: all 0.3s;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .filter-btn:hover {
-    background-color: #e0e0e0;
+    background-color: #ffb703;
 }
 
 .filter-btn.active {
-    background-color: #007bff;
-    color: #fff;
-    font-weight: bold;
+    background-color: #219ebc;
 }
 
-.search-form {
-    display: flex;
-    gap: 10px;
+.search-form input[type="text"] {
+    padding: 8px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
 }
 
-.search-form input {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
+.search-form button {
+    background-color: #219ebc;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #8ecae6;
+}
+
+/* Alertas */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
     border-radius: 5px;
 }
 
-/* Contenedor de la tabla */
-.table-responsive {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    overflow: hidden;
+.alert-success {
+    background-color: #8ecae6;
+    color: #023047;
 }
 
+.alert-danger {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+/* Tabla de Mensajes */
 .table {
     width: 100%;
     border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.table th,
-.table td {
-    padding: 12px 15px;
+.table th, .table td {
+    padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #e0e0e0;
-    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
 }
 
 .table th {
-    background-color: #f8f9fa;
+    background-color: #219ebc;
+    color: white;
+    font-size: 1.1rem;
 }
 
-/* Estilos de las filas de mensajes */
-.mensaje-summary-row.mensaje-nuevo {
-    font-weight: bold;
-    background-color: #fcfcfc;
+.table tr:hover {
+    background-color: #f1f1f1;
 }
 
-.mensaje-summary-row.mensaje-leido {
-    color: #6c757d;
-    font-weight: normal;
+/* Celdas de Acción */
+.actions-cell {
+    text-align: center;
 }
 
-.mensaje-summary-row.expanded {
-    background-color: #e9ecef;
+.actions-cell .btn {
+    margin: 5px;
 }
 
-.mensaje-expandido td {
-    padding: 0;
-}
-
-.mensaje-contenido-full {
-    padding: 25px;
-    background-color: #f8f9fa;
-}
-
-.mensaje-contenido-full h4 {
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.mensaje-contenido-full hr {
-    border: 0;
-    border-top: 1px solid #ddd;
-    margin: 15px 0;
-}
-
-/* Badges de estado */
+/* Estilos para las etiquetas de Estado de los Mensajes */
 .badge {
     padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-transform: capitalize;
 }
 
 .badge-nuevo {
-    background-color: #28a745;
-    color: #fff;
+    background-color: #fb8500;
+    color: white;
 }
 
 .badge-leido {
-    background-color: #6c757d;
-    color: #fff;
-}
-
-/* Celda de acciones */
-.actions-cell {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-/* Paginación */
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-    gap: 5px;
-}
-.pagination a {
-    color: #007bff;
-    padding: 8px 12px;
-    text-decoration: none;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    transition: all 0.2s;
-}
-.pagination a:hover {
-    background-color: #e9ecef;
-}
-.pagination a.active {
-    background-color: #007bff;
+    background-color: #219ebc;
     color: white;
-    border-color: #007bff;
 }
+
+/* Botones */
+.btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #219ebc;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #8ecae6;
+}
+
+.btn-danger {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #f44336;
+}
+
+/* Diseño del Mensaje Expandido */
+.mensaje-expandido {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-top: 2px solid #ddd;
+}
+
+.mensaje-contenido-full {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mensaje-contenido-full h4 {
+    font-size: 1.5rem;
+    color: #023047;
+    margin-bottom: 10px;
+}
+
+.mensaje-contenido-full p {
+    font-size: 1rem;
+    color: #023047;
+    line-height: 1.5;
+}
+
+/* Fila de resumen del mensaje */
+.mensaje-summary-row {
+    cursor: pointer;
+}
+
+.mensaje-summary-row.expanded {
+    background-color: #f1f1f1;
+}
+
+.mensaje-summary-row.mensaje-leido {
+    background-color: #e3f2fd;
+}
+
+.mensaje-summary-row.mensaje-nuevo {
+    background-color: #fff3e0;
+}
+

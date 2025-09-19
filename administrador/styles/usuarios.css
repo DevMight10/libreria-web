@@ -1,55 +1,157 @@
-.table-responsive {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    overflow-x: auto;
+/* Estilos Generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
 }
 
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* Títulos */
+h1 {
+    color: #023047;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Alertas */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #8ecae6;
+    color: #023047;
+}
+
+.alert-danger {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+/* Tabla de Usuarios */
 .table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 700px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.table th,
-.table td {
-    padding: 12px 15px;
+.table th, .table td {
+    padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #e0e0e0;
-    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
 }
 
 .table th {
-    background-color: #f8f9fa;
-    font-weight: bold;
+    background-color: #219ebc;
+    color: white;
+    font-size: 1.1rem;
 }
 
-.table tbody tr:hover {
+.table tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Badges de Rol */
+/* Celdas de Acción */
+.actions-cell {
+    text-align: center;
+}
+
+.actions-cell .btn {
+    margin: 5px;
+}
+
+/* Estilos para las etiquetas de los roles */
 .badge {
     padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #fff;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-transform: capitalize;
 }
 
 .badge-admin {
-    background-color: #dc3545; /* Rojo */
+    background-color: #ffb703;
+    color: #023047;
 }
 
 .badge-cliente {
-    background-color: #007bff; /* Azul */
+    background-color: #219ebc;
+    color: white;
 }
 
-/* Celda de acciones */
-.actions-cell {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+/* Botones */
+.btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
 }
+
+.btn-secondary {
+    background-color: #fb8500;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #ffb703;
+}
+
+.btn-success {
+    background-color: #8ecae6;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #219ebc;
+}
+
+.btn-warning {
+    background-color: #fb8500;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #ffb703;
+}
+
+.btn-danger {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #f44336;
+}
+
+/* Estilos para el formulario de confirmación */
+form {
+    display: inline-block;
+}
+
+form button {
+    cursor: pointer;
+}
+
+/* Desactivar botones */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Diseño de las celdas de tabla */
+td, th {
+    font-size: 1rem;
+}
+

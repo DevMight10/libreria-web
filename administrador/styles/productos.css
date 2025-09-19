@@ -1,10 +1,21 @@
-/* Contenedor principal y título */
-.container {
-    max-width: 1400px;
+/* Paleta de colores:
+  Azul oscuro: #023047
+  Azul medio: #219ebc
+  Amarillo: #ffb703
+*/
+
+main.container {
+    max-width: 1600px;
+    background-color: #f8f9fa;
+    padding: 2rem;
 }
 
 h1 {
-    color: #333;
+    color: #023047;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem !important;
 }
 
 /* Barra de filtros y búsqueda */
@@ -13,28 +24,29 @@ h1 {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
-    padding: 15px;
+    gap: 1rem;
+    padding: 1.5rem;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-bottom: 25px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
 }
 
 .filters {
     display: flex;
-    gap: 10px;
+    gap: 0.75rem;
     flex-wrap: wrap;
 }
 
 .filter-btn {
     text-decoration: none;
-    padding: 8px 15px;
+    padding: 0.5rem 1rem;
     border-radius: 20px;
     background-color: #f1f1f1;
-    color: #555;
-    font-size: 14px;
-    transition: all 0.3s;
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
 }
 
 .filter-btn:hover {
@@ -42,45 +54,46 @@ h1 {
 }
 
 .filter-btn.active {
-    background-color: #007bff;
+    background-color: #219ebc; /* Azul medio */
     color: #fff;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .search-form {
     display: flex;
-    gap: 10px;
+    gap: 0.5rem;
 }
 
 .search-form input {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    min-width: 250px;
+}
+.search-form input:focus {
+    outline: none;
+    border-color: #219ebc;
+    box-shadow: 0 0 0 4px rgba(33, 158, 188, 0.15);
 }
 
-/* Botón principal de agregar */
-.mb-3 {
-    margin-bottom: 1.5rem !important;
-}
-
-/* Estilos de la tabla */
+/* Tabla de productos */
 .table-responsive {
     background-color: #fff;
-    padding: 25px;
+    padding: 1rem;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+    border: 1px solid #e0e0e0;
+    overflow-x: auto;
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 900px; /* Ancho mínimo para forzar scroll si es necesario */
+    min-width: 1000px;
 }
 
 .table th,
 .table td {
-    padding: 12px 15px;
+    padding: 1rem;
     text-align: left;
     border-bottom: 1px solid #e0e0e0;
     vertical-align: middle;
@@ -88,63 +101,73 @@ h1 {
 
 .table th {
     background-color: #f8f9fa;
-    font-weight: bold;
+    color: #023047;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
 }
 
 .table tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f4f8fa;
 }
 
 .table img {
-    border-radius: 5px;
+    border-radius: 6px;
     object-fit: cover;
+    width: 60px;
+    height: 60px;
 }
 
-/* Fila de producto inactivo */
 .inactive-row {
     opacity: 0.6;
-    background-color: #fcfcfc;
 }
-
 .inactive-row:hover {
     opacity: 1;
 }
 
-/* Badges de estado */
+/* Etiquetas y botones en tabla */
 .badge {
-    padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #fff;
+    padding: 0.4em 0.8em;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
 }
 
-.badge-activo {
-    background-color: #28a745; /* Verde */
-}
+.badge-activo { background-color: #219ebc; color: #fff; }
+.badge-inactivo { background-color: #6c757d; color: #fff; }
 
-.badge-inactivo {
-    background-color: #6c757d; /* Gris */
-}
-
-/* Botón de destacar */
 .btn-destacar {
-    font-size: 1.2rem;
-    color: #6c757d;
+    font-size: 1.3rem;
+    color: #ccc;
     text-decoration: none;
     transition: color 0.2s;
 }
+.btn-destacar:hover { color: #ffb703; }
+.btn-destacar .fa-star { color: #ffb703; }
 
-.btn-destacar:hover {
-    color: #ffc107;
+.table .btn-sm {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
 }
 
-.btn-destacar .fa-star {
-    color: #ffc107;
-}
+.table .btn-secondary { border-color: #219ebc; color: #219ebc; }
+.table .btn-secondary:hover { background-color: #219ebc; color: #fff; }
+
+.table .btn-warning { border-color: #ffb703; color: #ffb703; }
+.table .btn-warning:hover { background-color: #ffb703; color: #333; }
+
+.table .btn-success { border-color: #28a745; color: #28a745; }
+.table .btn-success:hover { background-color: #28a745; color: #fff; }
 
 /* Alertas */
 .alert {
-    margin-bottom: 20px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-weight: 600;
 }
+.alert-success { background-color: #e3f3ff; color: #023047; border-color: #8ecae6; }
+.alert-danger { background-color: #fff0f1; color: #e63946; border-color: #f5c6cb; }
