@@ -1,10 +1,20 @@
+:root {
+  --color-primary: #fb8500;      /* Naranja */
+  --color-primary-dark: #e67300; /* Naranja oscuro para hover */
+  --color-secondary: #219ebc;   /* Azul medio */
+  --color-accent: #ffb703;      /* Amarillo */
+  --color-dark: #023047;        /* Azul oscuro */
+  --color-light: #8ecae6;      /* Azul claro */
+  --color-white: #fff;
+  --color-gray: #f8f9fa;
+  --color-text: #495057;
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
-    /* font-size: 18px; */
-    /* border: 1px red solid; */
 }
 
 .container {
@@ -13,17 +23,35 @@
     padding: 0 20px;
 }
 
-.btn{
-  display: inline-block;
-  background: #007B44;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-weight: 700;
+/* Estilo base para botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 10px 24px rgba(0,0,0,.22);
-  transition: background .2s, box-shadow .2s, transform .05s;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
-.btn:hover{ background:#3F9C72; }
-.btn:active{ transform: translateY(1px); }
+
+/* Botón Primario (Naranja) */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn:active, .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
 
