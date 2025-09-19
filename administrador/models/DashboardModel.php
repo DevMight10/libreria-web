@@ -8,10 +8,10 @@ class DashboardModel {
 
     public function getStats() {
         $stats = [];
-        $stats['total_productos'] = $this->pdo->query("SELECT COUNT(*) FROM productos WHERE activo = 1")->fetchColumn();
+        $stats['total_libros'] = $this->pdo->query("SELECT COUNT(*) FROM libros WHERE activo = 1")->fetchColumn();
         $stats['pedidos_pendientes'] = $this->pdo->query("SELECT COUNT(*) FROM pedidos WHERE estado = 'pendiente'")->fetchColumn();
         $stats['mensajes_nuevos'] = $this->pdo->query("SELECT COUNT(*) FROM mensajes WHERE leido = 0")->fetchColumn();
-        $stats['total_categorias'] = $this->pdo->query("SELECT COUNT(*) FROM categorias")->fetchColumn();
+        $stats['total_generos'] = $this->pdo->query("SELECT COUNT(*) FROM generos")->fetchColumn();
         $stats['total_usuarios'] = $this->pdo->query("SELECT COUNT(*) FROM usuarios")->fetchColumn();
         return $stats;
     }

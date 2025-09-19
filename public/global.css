@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll;
+}
+
 :root {
   --color-primary: #fb8500;      /* Naranja */
   --color-primary-dark: #e67300; /* Naranja oscuro para hover */
@@ -17,8 +21,19 @@
     font-family: sans-serif;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
 .container {
     max-width: 1300px;
+    min-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }

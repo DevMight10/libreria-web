@@ -23,7 +23,7 @@ include '../../public/componentes/header.php';
                 <div class="order-success">
                     <h2>¡Gracias por tu pedido!</h2>
                     <p>Nos pondremos en contacto contigo pronto para coordinar el pago y la entrega.</p>
-                    <a href="/proyecto-01/cliente/pages/productos.php" class="btn btn-primary">Continuar Comprando</a>
+                    <a href="/proyecto-01/cliente/pages/libros.php" class="btn btn-primary">Seguir Viendo Libros</a>
                 </div>
             <?php endif; ?>
         <?php else: ?>
@@ -31,7 +31,7 @@ include '../../public/componentes/header.php';
                 <h2>Resumen del Pedido</h2>
                 
                 <div class="order-items">
-                    <?php foreach ($carrito_items as $producto_id => $item): ?>
+                    <?php foreach ($carrito_items as $libro_id => $item): ?>
                         <div class="order-item">
                             <img src="/proyecto-01/public/<?php echo htmlspecialchars($item['imagen']); ?>" 
                                  alt="<?php echo htmlspecialchars($item['nombre']); ?>">

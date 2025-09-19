@@ -1,7 +1,7 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-col">
-      <h4>Tienda</h4>
+      <h4>Librería Adrimarth</h4>
       <ul>
         <li><a href="/proyecto-01/cliente/pages/productos.php">Catálogo</a></li>
         <li><a href="#">Promociones</a></li>
@@ -23,14 +23,14 @@
       <address>
         Satélite Norte, Warnes<br>
         <a href="tel:+59170000000">+591 70000000</a><br>
-        <a href="mailto:info@minichic.com">info@minichic.com</a>
+        <a href="mailto:info@adrimarth.com">info@adrimarth.com</a>
       </address>
     </div>
   </div>
 
   <div class="footer-bottom">
     <div class="container">
-      © 2025 MINI CHIC. Todos los derechos reservados.
+      © 2025 Librería Adrimarth. Todos los derechos reservados.
     </div>
   </div>
 </footer>

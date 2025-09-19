@@ -1,5 +1,5 @@
 <?php
-class ProductoModel {
+class LibroModel {
     private $pdo;
 
     public function __construct($pdo) {
@@ -11,25 +11,21 @@ class ProductoModel {
         $params = [];
         $limit_sql = '';
 
-        // Filtro para productos activos (para la tienda)
         if (isset($filtros['activo'])) {
             $where_conditions[] = 'p.activo = ?';
             $params[] = $filtros['activo'];
         }
 
-        // Filtro para productos destacados
         if (isset($filtros['destacado'])) {
             $where_conditions[] = 'p.destacado = ?';
             $params[] = $filtros['destacado'];
         }
 
-        // Filtro por categoría
-        if (!empty($filtros['categoria_id']) && $filtros['categoria_id'] !== 'todos') {
-            $where_conditions[] = 'p.categoria_id = ?';
-            $params[] = $filtros['categoria_id'];
+        if (!empty($filtros['genero_id']) && $filtros['genero_id'] !== 'todos') {
+            $where_conditions[] = 'p.genero_id = ?';
+            $params[] = $filtros['genero_id'];
         }
 
-        // Búsqueda por ID o nombre
         if (!empty($filtros['buscar'])) {
             $where_conditions[] = '(p.nombre LIKE ? OR p.id = ?)';
             $params[] = "%{$filtros['buscar']}";
@@ -45,9 +41,9 @@ class ProductoModel {
             $limit_sql = 'LIMIT ' . (int)$filtros['limit'];
         }
 
-        $sql = "SELECT p.*, c.nombre as categoria_nombre
-                FROM productos p
-                LEFT JOIN categorias c ON p.categoria_id = c.id
+        $sql = "SELECT p.*, c.nombre as genero_nombre
+                FROM libros p
+                LEFT JOIN generos c ON p.genero_id = c.id
                 {$sql_where}
                 ORDER BY p.fecha_creacion DESC
                 {$limit_sql}";
@@ -57,15 +53,15 @@ class ProductoModel {
         return $stmt->fetchAll();
     }
 
-    public function getCategorias() {
-        $stmt = $this->pdo->query("SELECT * FROM categorias ORDER BY nombre");
+    public function getGeneros() {
+        $stmt = $this->pdo->query("SELECT * FROM generos ORDER BY nombre");
         return $stmt->fetchAll();
     }
 
     public function find($id) {
-        $sql = "SELECT p.*, c.nombre as categoria_nombre 
-                FROM productos p
-                LEFT JOIN categorias c ON p.categoria_id = c.id
+        $sql = "SELECT p.*, c.nombre as genero_nombre 
+                FROM libros p
+                LEFT JOIN generos c ON p.genero_id = c.id
                 WHERE p.id = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
@@ -73,33 +69,32 @@ class ProductoModel {
     }
 
     public function toggleStatus($id, $field) {
-        // Validar que el campo sea uno de los permitidos para evitar inyección SQL
         if (!in_array($field, ['activo', 'destacado'])) {
             return false;
         }
 
-        $stmt_current = $this->pdo->prepare("SELECT $field FROM productos WHERE id = ?");
+        $stmt_current = $this->pdo->prepare("SELECT $field FROM libros WHERE id = ?");
         $stmt_current->execute([$id]);
         $estado_actual = $stmt_current->fetchColumn();
 
         if ($estado_actual === false) {
-            return false; // No se encontró el producto
+            return false;
         }
 
         $nuevo_estado = ($estado_actual == 1) ? 0 : 1;
-        $stmt_update = $this->pdo->prepare("UPDATE productos SET $field = ? WHERE id = ?");
+        $stmt_update = $this->pdo->prepare("UPDATE libros SET $field = ? WHERE id = ?");
         return $stmt_update->execute([$nuevo_estado, $id]);
     }
 
     public function add($data) {
-        $sql = "INSERT INTO productos (nombre, descripcion, precio, categoria_id, stock, activo, destacado, imagen, fecha_creacion) 
-                VALUES (:nombre, :descripcion, :precio, :categoria_id, :stock, :activo, :destacado, :imagen, NOW())";
+        $sql = "INSERT INTO libros (nombre, descripcion, precio, genero_id, stock, activo, destacado, imagen, fecha_creacion) 
+                VALUES (:nombre, :descripcion, :precio, :genero_id, :stock, :activo, :destacado, :imagen, NOW())";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
             ':nombre' => $data['nombre'],
             ':descripcion' => $data['descripcion'],
             ':precio' => $data['precio'],
-            ':categoria_id' => $data['categoria_id'],
+            ':genero_id' => $data['genero_id'],
             ':stock' => $data['stock'],
             ':activo' => $data['activo'],
             ':destacado' => $data['destacado'],
@@ -108,11 +103,11 @@ class ProductoModel {
     }
 
     public function update($id, $data) {
-        $sql = "UPDATE productos SET 
+        $sql = "UPDATE libros SET 
                     nombre = :nombre, 
                     descripcion = :descripcion, 
                     precio = :precio, 
-                    categoria_id = :categoria_id, 
+                    genero_id = :genero_id, 
                     stock = :stock, 
                     activo = :activo, 
                     destacado = :destacado,
@@ -123,7 +118,7 @@ class ProductoModel {
             ':nombre' => $data['nombre'],
             ':descripcion' => $data['descripcion'],
             ':precio' => $data['precio'],
-            ':categoria_id' => $data['categoria_id'],
+            ':genero_id' => $data['genero_id'],
             ':stock' => $data['stock'],
             ':activo' => $data['activo'],
             ':destacado' => $data['destacado'],

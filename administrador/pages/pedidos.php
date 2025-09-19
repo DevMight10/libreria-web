@@ -77,19 +77,19 @@ include '../../public/componentes/admin_header.php';
                                     <strong>Email:</strong> <?php echo htmlspecialchars($pedido['cliente_email']); ?>
                                 </div>
                                 <hr>
-                                <h5>Productos</h5>
-                                <?php if (empty($pedido['productos'])): ?>
-                                    <p>Este pedido no tiene productos asociados.</p>
+                                <h5>Libros</h5>
+                                <?php if (empty($pedido['libros'])): ?>
+                                    <p>Este pedido no tiene libros asociados.</p>
                                 <?php else: ?>
-                                    <?php foreach ($pedido['productos'] as $producto): ?>
+                                    <?php foreach ($pedido['libros'] as $libro): ?>
                                         <div class="product-item">
-                                            <img src="/proyecto-01/public/<?php echo htmlspecialchars($producto['producto_imagen']); ?>" alt="<?php echo htmlspecialchars($producto['producto_nombre']); ?>">
+                                            <img src="/proyecto-01/public/<?php echo htmlspecialchars($libro['libro_imagen']); ?>" alt="<?php echo htmlspecialchars($libro['libro_nombre']); ?>">
                                             <div class="product-info">
-                                                <?php echo htmlspecialchars($producto['producto_nombre']); ?>
-                                                <small>Cantidad: <?php echo $producto['cantidad']; ?></small>
+                                                <?php echo htmlspecialchars($libro['libro_nombre']); ?>
+                                                <small>Cantidad: <?php echo $libro['cantidad']; ?></small>
                                             </div>
                                             <div class="product-price">
-                                                <?php echo formatPrice($producto['precio_unitario'] * $producto['cantidad']); ?>
+                                                <?php echo formatPrice($libro['precio_unitario'] * $libro['cantidad']); ?>
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
@@ -126,14 +126,14 @@ include '../../public/componentes/admin_header.php';
         if ($total_paginas > 1) {
             $query_params = http_build_query(['filtro_estado' => $filtro_estado, 'buscar_codigo' => $buscar_codigo]);
             if ($pagina_actual > 1) {
-                echo "<a href=\"?{$query_params}&pagina=" . ($pagina_actual - 1) . "\">Anterior</a>";
+                echo "<a href=\"?{$query_params}&pagina=". ($pagina_actual - 1) ."\">Anterior</a>";
             }
             for ($i = 1; $i <= $total_paginas; $i++) {
                 $active_class = ($i == $pagina_actual) ? 'active' : '';
                 echo "<a href=\"?{$query_params}&pagina={$i}\" class=\"{$active_class}\">{$i}</a>";
             }
             if ($pagina_actual < $total_paginas) {
-                echo "<a href=\"?{$query_params}&pagina=" . ($pagina_actual + 1) . "\">Siguiente</a>";
+                echo "<a href=\"?{$query_params}&pagina=". ($pagina_actual + 1) ."\">Siguiente</a>";
             }
         }
         ?>

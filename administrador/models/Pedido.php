@@ -54,7 +54,7 @@ class PedidoModel {
 
         // Obtener detalles para cada pedido
         foreach ($pedidos as &$pedido) {
-            $pedido['productos'] = $this->getDetails($pedido['id']);
+            $pedido['libros'] = $this->getDetails($pedido['id']);
         }
 
         return $pedidos;
@@ -62,9 +62,9 @@ class PedidoModel {
 
     public function getDetails($pedido_id) {
         $stmt = $this->pdo->prepare("
-            SELECT pd.*, pr.nombre as producto_nombre, pr.imagen as producto_imagen
+            SELECT pd.*, l.nombre as libro_nombre, l.imagen as libro_imagen
             FROM pedido_detalles pd
-            JOIN productos pr ON pd.producto_id = pr.id
+            JOIN libros l ON pd.libro_id = l.id
             WHERE pd.pedido_id = ?
         ");
         $stmt->execute([$pedido_id]);

@@ -1,6 +1,6 @@
 <?php
 // 1. Incluir el controlador, que se encarga de toda la lógica
-require_once '../controllers/categorias_controller.php';
+require_once '../controllers/generos_controller.php';
 
 // 2. Incluir el header
 include '../../public/componentes/admin_header.php';
@@ -22,45 +22,45 @@ include '../../public/componentes/admin_header.php';
 
     <div class="category-grid">
         <div class="form-container">
-            <h2>Agregar Nueva Categoría</h2>
-            <form action="/proyecto-01/administrador/pages/categorias.php" method="POST">
+            <h2>Agregar Nuevo Género</h2>
+            <form action="/proyecto-01/administrador/pages/generos.php" method="POST">
                 <input type="hidden" name="action" value="add">
                 <div class="form-group">
-                    <label for="nombre">Nombre de la Categoría</label>
+                    <label for="nombre">Nombre del Género</label>
                     <input type="text" id="nombre" name="nombre" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Agregar Categoría</button>
+                <button type="submit" class="btn btn-primary">Agregar Género</button>
             </form>
         </div>
 
         <div class="table-responsive">
-            <h2>Categorías Existentes</h2>
+            <h2>Géneros Existentes</h2>
             <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Productos</th>
+                        <th>Libros</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (empty($categorias)): ?>
+                    <?php if (empty($generos)): ?>
                         <tr>
-                            <td colspan="4" style="text-align: center;">No hay categorías creadas.</td>
+                            <td colspan="4" style="text-align: center;">No hay géneros creados.</td>
                         </tr>
                     <?php else: ?>
-                        <?php foreach ($categorias as $categoria): ?>
+                        <?php foreach ($generos as $genero): ?>
                             <tr>
-                                <td><?php echo $categoria['id']; ?></td>
-                                <td><?php echo htmlspecialchars($categoria['nombre']); ?></td>
-                                <td><?php echo $categoria['product_count']; ?></td>
+                                <td><?php echo $genero['id']; ?></td>
+                                <td><?php echo htmlspecialchars($genero['nombre']); ?></td>
+                                <td><?php echo $genero['libro_count']; ?></td>
                                 <td class="actions-cell-buttons">
-                                    <a href="/proyecto-01/administrador/pages/editar_categoria.php?id=<?php echo $categoria['id']; ?>" class="btn btn-sm btn-secondary" title="Editar">Editar</a>
-                                    <form action="/proyecto-01/administrador/pages/categorias.php" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta categoría?');">
-                                        <input type="hidden" name="id" value="<?php echo $categoria['id']; ?>">
+                                    <a href="/proyecto-01/administrador/pages/editar_genero.php?id=<?php echo $genero['id']; ?>" class="btn btn-sm btn-secondary" title="Editar">Editar</a>
+                                    <form action="/proyecto-01/administrador/pages/generos.php" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este género?');">
+                                        <input type="hidden" name="id" value="<?php echo $genero['id']; ?>">
                                         <input type="hidden" name="action" value="delete">
-                                        <button type="submit" class="btn btn-sm btn-danger" title="Eliminar" <?php echo ($categoria['product_count'] > 0) ? 'disabled' : ''; ?>>Eliminar</button>
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Eliminar" <?php echo ($genero['libro_count'] > 0) ? 'disabled' : ''; ?>>Eliminar</button>
                                     </form>
                                 </td>
                             </tr>

@@ -1,11 +1,11 @@
 <?php
 // 1. Incluir el controlador
-require_once '../controllers/producto_detalle_controller.php';
+require_once '../controllers/libro_detalle_controller.php';
 
 // 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/producto-detalle.css">
+<link rel="stylesheet" href="/proyecto-01/cliente/styles/libro-detalle.css">
 
 
 <main>
@@ -26,24 +26,24 @@ include '../../public/componentes/header.php';
 
         <div class="product-detail">
             <div class="product-image">
-                <img src="/proyecto-01/public/<?php echo $producto['imagen']; ?>"
-                    alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                <img src="/proyecto-01/public/<?php echo $libro['imagen']; ?>"
+                    alt="<?php echo htmlspecialchars($libro['nombre']); ?>">
             </div>
 
             <div class="product-info">
-                <h1><?php echo htmlspecialchars($producto['nombre']); ?></h1>
-                <p class="category">Género: <?php echo htmlspecialchars($producto['categoria_nombre']); ?></p>
-                <p class="price"><?php echo formatPrice($producto['precio']); ?></p>
+                <h1><?php echo htmlspecialchars($libro['nombre']); ?></h1>
+                <p class="category">Género: <?php echo htmlspecialchars($libro['genero_nombre']); ?></p>
+                <p class="price"><?php echo formatPrice($libro['precio']); ?></p>
 
                 <div class="product-description">
                     <h3>Descripción</h3>
-                    <p><?php echo nl2br(htmlspecialchars($producto['descripcion'])); ?></p>
+                    <p><?php echo nl2br(htmlspecialchars($libro['descripcion'])); ?></p>
                 </div>
 
-                <p class="stock <?php echo ($producto['stock'] <= 5 && $producto['stock'] > 0) ? 'low-stock' : ''; ?>">
+                <p class="stock <?php echo ($libro['stock'] <= 5 && $libro['stock'] > 0) ? 'low-stock' : ''; ?>">
                     <?php
-                    if ($producto['stock'] > 0) {
-                        echo 'Disponibles: ' . $producto['stock'];
+                    if ($libro['stock'] > 0) {
+                        echo 'Disponibles: ' . $libro['stock'];
                     } else {
                         echo '<span class="out-of-stock">Agotado</span>';
                     }
@@ -51,14 +51,14 @@ include '../../public/componentes/header.php';
                 </p>
 
                 <?php if (isLoggedIn()): ?>
-                    <?php if ($producto['stock'] > 0): ?>
+                    <?php if ($libro['stock'] > 0): ?>
                         <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" class="add-to-cart-form">
                             <input type="hidden" name="action" value="add">
-                            <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
+                            <input type="hidden" name="id" value="<?php echo $libro['id']; ?>">
                             <input type="hidden" name="return_url" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
                             <div class="quantity-selector">
                                 <label for="cantidad">Cantidad:</label>
-                                <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="<?php echo $producto['stock']; ?>">
+                                <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="<?php echo $libro['stock']; ?>">
                             </div>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-cart-plus"></i> Agregar al Carrito

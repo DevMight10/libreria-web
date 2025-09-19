@@ -18,15 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['usuario_nombre'] = $usuario['nombre'];
         $_SESSION['tipo'] = $usuario['tipo'];
 
-        // --- Cargar carrito desde la base de datos ---
-        $stmt_cart = $pdo->prepare("SELECT ci.producto_id, ci.cantidad, p.nombre, p.precio, p.imagen FROM carrito_items ci JOIN productos p ON ci.producto_id = p.id WHERE ci.usuario_id = ?");
+        // --- Cargar carrito desde la base de datos (ACTUALIZADO) ---
+        $stmt_cart = $pdo->prepare("SELECT ci.libro_id, ci.cantidad, l.nombre, l.precio, l.imagen FROM carrito_items ci JOIN libros l ON ci.libro_id = l.id WHERE ci.usuario_id = ?");
         $stmt_cart->execute([$usuario['id']]);
         $items_db = $stmt_cart->fetchAll();
 
         if ($items_db) {
             $_SESSION['carrito'] = [];
             foreach ($items_db as $item) {
-                $_SESSION['carrito'][$item['producto_id']] = [
+                $_SESSION['carrito'][$item['libro_id']] = [
                     'cantidad' => $item['cantidad'],
                     'nombre' => $item['nombre'],
                     'precio' => $item['precio'],

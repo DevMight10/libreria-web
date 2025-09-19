@@ -36,7 +36,7 @@ include '../../public/componentes/header.php';
                     <i class="fas fa-envelope"></i>
                     <div>
                         <h3>Email</h3>
-                        <p>info@minichic.com</p>
+                        <p>info@adrimarth.com</p>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -71,7 +71,7 @@ include '../../public/componentes/header.php';
                         <label for="asunto">Asunto:</label>
                         <select id="asunto" name="asunto" required>
                             <option value="">Selecciona un asunto</option>
-                            <option value="Consulta sobre productos">Consulta sobre productos</option>
+                            <option value="Consulta sobre libros">Consulta sobre libros</option>
                             <option value="Problema con pedido">Problema con pedido</option>
                             <option value="Sugerencia">Sugerencia</option>
                             <option value="Reclamo">Reclamo</option>

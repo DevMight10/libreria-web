@@ -10,8 +10,7 @@ include '../../public/componentes/header.php';
 <link rel="stylesheet" href="/proyecto-01/cliente/styles/cart.css">
 
 <!-- 4. Contenido HTML -->
-<main>
-    <div class="container">
+<main class="container">
         <?php if ($mensaje): ?>
             <div class="alert alert-success"><?php echo htmlspecialchars($mensaje); ?></div>
         <?php endif; ?>
@@ -24,12 +23,12 @@ include '../../public/componentes/header.php';
         <?php if ($carrito_vacio): ?>
             <div class="empty-cart">
                 <p>Tu carrito está vacío</p>
-                <a href="/proyecto-01/cliente/pages/productos.php" class="btn btn-primary">Continuar Comprando</a>
+                <a href="/proyecto-01/cliente/pages/libros.php" class="btn btn-primary">Continuar Comprando</a>
             </div>
         <?php else: ?>
             <div class="cart-items">
-                <?php foreach ($carrito_items as $producto_id => $item): ?>
-                    <?php $max_quantity = $stocks[$producto_id] ?? 1; ?>
+                <?php foreach ($carrito_items as $libro_id => $item): ?>
+                    <?php $max_quantity = $stocks[$libro_id] ?? 1; ?>
                     <div class="cart-item">
                         <img src="/proyecto-01/public/<?php echo htmlspecialchars($item['imagen']); ?>"
                             alt="<?php echo htmlspecialchars($item['nombre']); ?>">
@@ -41,7 +40,7 @@ include '../../public/componentes/header.php';
 
                         <div class="cart-item-actions">
                             <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" class="quantity-form">
-                                <input type="hidden" name="producto_id" value="<?php echo $producto_id; ?>">
+                                <input type="hidden" name="libro_id" value="<?php echo $libro_id; ?>">
                                 <div class="quantity-controls">
                                     <input type="number" name="cantidad" value="<?php echo $item['cantidad']; ?>"
                                         min="1" max="<?php echo $max_quantity; ?>">
@@ -52,7 +51,7 @@ include '../../public/componentes/header.php';
                             </form>
 
                             <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" class="remove-form">
-                                <input type="hidden" name="producto_id" value="<?php echo $producto_id; ?>">
+                                <input type="hidden" name="libro_id" value="<?php echo $libro_id; ?>">
                                 <button type="submit" name="remove_item" class="btn btn-danger">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -83,8 +82,7 @@ include '../../public/componentes/header.php';
                 </div>
             </div>
         <?php endif; ?>
-    </div>
-</main>
+    </main>
 
 <?php
 // 5. Incluir el footer

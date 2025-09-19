@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'mini_chic_db';
+$dbname = 'libreria_adrimarth_db';
 $username = 'root';
 $password = '';
 

@@ -11,35 +11,35 @@ class Cart {
         }
     }
 
-    public function add($producto_id, $nombre, $precio, $imagen, $cantidad = 1) {
-        if (isset($_SESSION['carrito'][$producto_id])) {
-            $_SESSION['carrito'][$producto_id]['cantidad'] += $cantidad;
+    public function add($libro_id, $nombre, $precio, $imagen, $cantidad = 1) {
+        if (isset($_SESSION['carrito'][$libro_id])) {
+            $_SESSION['carrito'][$libro_id]['cantidad'] += $cantidad;
         } else {
-            $_SESSION['carrito'][$producto_id] = [
+            $_SESSION['carrito'][$libro_id] = [
                 'nombre' => $nombre,
                 'precio' => $precio,
                 'imagen' => $imagen,
                 'cantidad' => $cantidad
             ];
         }
-        $this->syncItem($producto_id);
+        $this->syncItem($libro_id);
     }
 
-    public function update($producto_id, $cantidad) {
-        if (isset($_SESSION['carrito'][$producto_id])) {
+    public function update($libro_id, $cantidad) {
+        if (isset($_SESSION['carrito'][$libro_id])) {
             if ($cantidad > 0) {
-                $_SESSION['carrito'][$producto_id]['cantidad'] = $cantidad;
-                $this->syncItem($producto_id);
+                $_SESSION['carrito'][$libro_id]['cantidad'] = $cantidad;
+                $this->syncItem($libro_id);
             } else {
-                $this->remove($producto_id);
+                $this->remove($libro_id);
             }
         }
     }
 
-    public function remove($producto_id) {
-        unset($_SESSION['carrito'][$producto_id]);
-        $stmt = $this->pdo->prepare("DELETE FROM carrito_items WHERE usuario_id = ? AND producto_id = ?");
-        $stmt->execute([$this->user_id, $producto_id]);
+    public function remove($libro_id) {
+        unset($_SESSION['carrito'][$libro_id]);
+        $stmt = $this->pdo->prepare("DELETE FROM carrito_items WHERE usuario_id = ? AND libro_id = ?");
+        $stmt->execute([$this->user_id, $libro_id]);
     }
 
     public function clear() {
@@ -60,12 +60,12 @@ class Cart {
         return $total;
     }
 
-    private function syncItem($producto_id) {
-        $cantidad = $_SESSION['carrito'][$producto_id]['cantidad'];
-        $sql = "INSERT INTO carrito_items (usuario_id, producto_id, cantidad) VALUES (?, ?, ?)
+    private function syncItem($libro_id) {
+        $cantidad = $_SESSION['carrito'][$libro_id]['cantidad'];
+        $sql = "INSERT INTO carrito_items (usuario_id, libro_id, cantidad) VALUES (?, ?, ?)
                 ON DUPLICATE KEY UPDATE cantidad = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$this->user_id, $producto_id, $cantidad, $cantidad]);
+        $stmt->execute([$this->user_id, $libro_id, $cantidad, $cantidad]);
     }
 }
 ?>

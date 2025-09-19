@@ -90,18 +90,18 @@ main h1 {
   border-color: #219ebc;
 }
 
-/* Grid de productos */
-.products-grid {
+/* Grid de libros */
+.libros-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 26px;
   padding: 20px 0 10px;
 }
 
-/* --- Nuevo Diseño de Tarjeta de Producto --- */
+/* --- Nuevo Diseño de Tarjeta de Libro --- */
 
 /* Contenedor principal de la tarjeta */
-.product-card {
+.libro-card {
   position: relative; /* Clave para posicionar elementos hijos */
   overflow: hidden; /* Esconde lo que se salga de los bordes redondeados */
   border-radius: 8px;
@@ -109,24 +109,24 @@ main h1 {
   transition: box-shadow 0.3s ease;
   background: #fff; /* Fondo de fallback */
 }
-.product-card:hover {
+.libro-card:hover {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Imagen del producto - ocupa todo el fondo */
-.product-card img {
+/* Imagen del libro - ocupa todo el fondo */
+.libro-card img {
   width: 100%;
   aspect-ratio: 4 / 5; /* Imagen un poco más alta que ancha */
   object-fit: cover;
   border-radius: 8px;
   transition: transform 0.4s ease;
 }
-.product-card:hover img {
+.libro-card:hover img {
   transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
 }
 
-/* Overlay de información del producto */
-.product-card .product-info {
+/* Overlay de información del libro */
+.libro-card .libro-info {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -141,17 +141,17 @@ main h1 {
 }
 
 /* Estilos del texto dentro del overlay */
-.product-card h3 {
+.libro-card h3 {
   margin: 0;
   font-size: 1.2rem;
   color: #fff;
   font-weight: 600;
 }
-.product-card .category {
+.libro-card .category {
   font-size: 0.85rem;
   color: #8ecae6; /* Azul claro de la paleta */
 }
-.product-card .price {
+.libro-card .price {
   font-weight: 700;
   color: #ffb703; /* Amarillo para el precio, destaca bien */
   font-size: 1.3rem;
@@ -159,7 +159,7 @@ main h1 {
 }
 
 /* Indicador de Stock - posicionado en la esquina superior derecha */
-.product-card .stock {
+.libro-card .stock {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -171,17 +171,17 @@ main h1 {
   font-weight: 600;
   z-index: 2;
 }
-.product-card .stock.low-stock {
+.libro-card .stock.low-stock {
   background-color: #fb8500; /* Naranja */
   color: #fff;
 }
-.product-card .out-of-stock {
+.libro-card .out-of-stock {
   background-color: #e63946;
   color: #fff;
 }
 
 /* Botones de acción - aparecen al pasar el mouse */
-.product-actions {
+.libro-actions {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -194,19 +194,19 @@ main h1 {
   width: 80%;
   z-index: 3;
 }
-.product-card:hover .product-actions {
+.libro-card:hover .libro-actions {
   opacity: 1;
   transform: translate(-50%, -50%);
 }
 
 /* Ocultar la info para dar espacio a los botones */
-.product-card:hover .product-info {
+.libro-card:hover .libro-info {
   opacity: 0;
   transform: translateY(20%);
 }
 
 /* Estilo de los botones en la tarjeta */
-.product-actions .btn {
+.libro-actions .btn {
   width: 100%;
   padding: 12px;
   border-radius: 5px;
@@ -239,7 +239,7 @@ main h1 {
 
 /* Responsivo */
 @media (max-width: 480px) {
-  .products-grid {
+  .libros-grid {
     gap: 18px;
   }
   .filter-btn {

@@ -1,6 +1,6 @@
 <?php
 // 1. Incluir el controlador
-require_once '../controllers/editar_categoria_controller.php';
+require_once '../controllers/editar_genero_controller.php';
 
 // 2. Incluir el header
 include '../../public/componentes/admin_header.php';
@@ -13,8 +13,8 @@ include '../../public/componentes/admin_header.php';
 <main class="container">
     <h1><?php echo $page_title; ?></h1>
 
-    <a href="/proyecto-01/administrador/pages/categorias.php" class="btn btn-secondary mb-3">
-        <i class="fas fa-arrow-left"></i> Volver a Categorías
+    <a href="/proyecto-01/administrador/pages/generos.php" class="btn btn-secondary mb-3">
+        <i class="fas fa-arrow-left"></i> Volver a Géneros
     </a>
 
     <?php if (isset($error)): ?>
@@ -22,10 +22,10 @@ include '../../public/componentes/admin_header.php';
     <?php endif; ?>
 
     <div class="form-container">
-        <form action="/proyecto-01/administrador/pages/editar_categoria.php?id=<?php echo $categoria['id']; ?>" method="POST">
+        <form action="/proyecto-01/administrador/pages/editar_genero.php?id=<?php echo $genero['id']; ?>" method="POST">
             <div class="form-group">
-                <label for="nombre">Nombre de la Categoría</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo htmlspecialchars($categoria['nombre']); ?>" required>
+                <label for="nombre">Nombre del Género</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo htmlspecialchars($genero['nombre']); ?>" required>
             </div>
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
         </form>

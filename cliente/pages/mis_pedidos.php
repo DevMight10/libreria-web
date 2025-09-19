@@ -23,7 +23,7 @@ include '../../public/componentes/header.php';
     <div class="accordion">
         <?php if (empty($pedidos)): ?>
             <p>Aún no has realizado ningún pedido.</p>
-            <a href="/proyecto-01/cliente/pages/productos.php" class="btn btn-primary">Ver productos</a>
+            <a href="/proyecto-01/cliente/pages/libros.php" class="btn btn-primary">Ver libros</a>
         <?php else: ?>
             <?php foreach ($pedidos as $pedido_id => $pedido): ?>
                 <div class="accordion-item">
@@ -41,15 +41,15 @@ include '../../public/componentes/header.php';
                     <div class="accordion-content">
                         <div class="order-details">
                             <h4>Detalles del Pedido</h4>
-                            <?php foreach ($pedido['productos'] as $producto): ?>
+                            <?php foreach ($pedido['libros'] as $libro): ?>
                                 <div class="product-item">
-                                    <img src="/proyecto-01/public/<?php echo htmlspecialchars($producto['imagen']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                                    <img src="/proyecto-01/public/<?php echo htmlspecialchars($libro['imagen']); ?>" alt="<?php echo htmlspecialchars($libro['nombre']); ?>">
                                     <div class="product-info">
-                                        <?php echo htmlspecialchars($producto['nombre']); ?>
-                                        <small>Cantidad: <?php echo $producto['cantidad']; ?></small>
+                                        <?php echo htmlspecialchars($libro['nombre']); ?>
+                                        <small>Cantidad: <?php echo $libro['cantidad']; ?></small>
                                     </div>
                                     <div class="product-price">
-                                        <?php echo formatPrice($producto['precio_unitario'] * $producto['cantidad']); ?>
+                                        <?php echo formatPrice($libro['precio_unitario'] * $libro['cantidad']); ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

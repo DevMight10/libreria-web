@@ -15,14 +15,14 @@ include '../../public/componentes/admin_header.php';
 
     <div class="admin-stats">
         <div class="stat-card">
-            <h3><?= $stats['total_categorias'] ?></h3>
-            <p>Categorías</p>
-            <a href="/proyecto-01/administrador/pages/categorias.php">Ver Categorías</a>
+            <h3><?= $stats['total_generos'] ?></h3>
+            <p>Géneros</p>
+            <a href="/proyecto-01/administrador/pages/generos.php">Ver Géneros</a>
         </div>
         <div class="stat-card">
-            <h3><?= $stats['total_productos'] ?></h3>
-            <p>Productos Activos</p>
-            <a href="/proyecto-01/administrador/pages/productos.php">Gestionar</a>
+            <h3><?= $stats['total_libros'] ?></h3>
+            <p>Libros Activos</p>
+            <a href="/proyecto-01/administrador/pages/libros.php">Gestionar</a>
         </div>
         <div class="stat-card">
             <h3><?= $stats['pedidos_pendientes'] ?></h3>

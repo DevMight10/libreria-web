@@ -1,5 +1,5 @@
-CREATE DATABASE mini_chic_db;
-USE mini_chic_db;
+CREATE DATABASE libreria_adrimarth_db;
+USE libreria_adrimarth_db;
 
 -- Tabla de usuarios
 CREATE TABLE usuarios (
@@ -13,26 +13,26 @@ CREATE TABLE usuarios (
     password_actualizado_en TIMESTAMP NULL DEFAULT NULL
 );
 
--- Tabla de categorías
-CREATE TABLE categorias (
+-- Tabla de géneros de libros
+CREATE TABLE generos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     descripcion TEXT
 );
 
--- Tabla de productos
-CREATE TABLE productos (
+-- Tabla de libros
+CREATE TABLE libros (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
-    categoria_id INT,
+    genero_id INT,
     imagen VARCHAR(255),
     stock INT DEFAULT 0,
     activo BOOLEAN DEFAULT TRUE,
     destacado BOOLEAN DEFAULT FALSE,   
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+    FOREIGN KEY (genero_id) REFERENCES generos(id)
 );
 
 
@@ -54,12 +54,12 @@ CREATE TABLE pedidos (
 CREATE TABLE pedido_detalles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pedido_id INT NOT NULL,
-    producto_id INT NOT NULL,
+    libro_id INT NOT NULL,
     cantidad INT NOT NULL,
     precio_unitario DECIMAL(10,2) NOT NULL,
     subtotal DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
-    FOREIGN KEY (producto_id) REFERENCES productos(id)
+    FOREIGN KEY (libro_id) REFERENCES libros(id)
 );
 
 CREATE TABLE mensajes (
@@ -72,27 +72,27 @@ CREATE TABLE mensajes (
     fecha_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabla para persistir los productos del carrito de cada usuario
+-- Tabla para persistir los libros del carrito de cada usuario
 CREATE TABLE carrito_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
-    producto_id INT NOT NULL,
+    libro_id INT NOT NULL,
     cantidad INT NOT NULL DEFAULT 1,
     agregado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
-    FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE,
-    UNIQUE KEY `usuario_producto` (`usuario_id`, `producto_id`)
+    FOREIGN KEY (libro_id) REFERENCES libros(id) ON DELETE CASCADE,
+    UNIQUE KEY `usuario_libro` (`usuario_id`, `libro_id`)
 );
 
--- Insertar categorías iniciales
-INSERT INTO categorias (nombre, descripcion) VALUES
-('Recién Nacido', 'Ropa para bebés de 0-3 meses'),
-('3-6 Meses', 'Ropa para bebés de 3-6 meses'),
-('6-12 Meses', 'Ropa para bebés de 6-12 meses'),
-('1-2 Años', 'Ropa para niños de 1-2 años'),
-('Accesorios', 'Gorros, baberos, calcetines');
+-- Insertar géneros iniciales
+INSERT INTO generos (nombre, descripcion) VALUES
+('Biografías', 'Libros que cuentan la vida de una persona'),
+('No Ficción', 'Libros basados en hechos y realidad'),
+('Misterio', 'Libros con tramas de suspenso y crímenes'),
+('Ciencia Ficción', 'Historias futuristas con tecnología avanzada'),
+('Infantil', 'Cuentos y libros para niños');
 
 -- Insertar usuario admin por defecto
 INSERT INTO usuarios (nombre, email, password, tipo) VALUES
-('Administrador', 'admin@minichic.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+('Administrador', 'admin@adrimarth.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
 -- Password: password

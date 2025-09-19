@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../auth/functions.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($page_title) ? $page_title . ' - ' : ''; ?>Mini Chic</title>
+    <title><?php echo isset($page_title) ? $page_title . ' - ' : ''; ?>Librería Adrimarth</title>
     
     <!-- <link rel="stylesheet" href="/proyecto-01/cliente/styles/base.css"> -->
     <link rel="stylesheet" href="/proyecto-01/cliente/styles/header.css">
@@ -24,12 +24,12 @@ require_once __DIR__ . '/../../auth/functions.php';
 <body>
     <header class="site-header">
         <div class="container header-container">
-            <a href="/proyecto-01/cliente/pages/index.php" class="logo">Mini Chic</a>
+            <a href="/proyecto-01/cliente/pages/index.php" class="logo">Librería Adrimarth</a>
 
             <nav class="main-nav">
                 <ul>
                     <li><a href="/proyecto-01/cliente/pages/index.php">Inicio</a></li>
-                    <li><a href="/proyecto-01/cliente/pages/productos.php">Productos</a></li>
+<li><a href="/proyecto-01/cliente/pages/libros.php">Libros</a></li>
                     <li><a href="/proyecto-01/cliente/pages/contacto.php">Contacto</a></li>
                 </ul>
             </nav>
@@ -45,6 +45,9 @@ require_once __DIR__ . '/../../auth/functions.php';
                         <?php endif; ?>
                     </a>
                     <a href="/proyecto-01/cliente/pages/mis_pedidos.php" class="icon-link" aria-label="Mis Pedidos">
+                        <i class="fas fa-receipt"></i>
+                    </a>
+                    <a href="/proyecto-01/cliente/pages/perfil.php" class="icon-link" aria-label="Mi Perfil">
                         <i class="fas fa-user"></i>
                     </a>
                     <?php if (isAdmin()): ?>
