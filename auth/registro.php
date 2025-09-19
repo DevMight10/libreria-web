@@ -39,44 +39,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include '../public/componentes/header.php';
 ?>
 
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/registro.css">
+<link rel="stylesheet" href="/proyecto-01/cliente/styles/login.css">
 
-<main>
-    <div class="container">
-        <div class="auth-form">
-            <h1>Registro</h1>
-            <?php if ($error): ?>
-                <div class="alert alert-error"><?php echo $error; ?></div>
-            <?php endif; ?>
-            <?php if ($success): ?>
-                <div class="alert alert-success"><?php echo $success; ?></div>
-            <?php endif; ?>
-            
-            <form method="POST">
-                <div class="form-group">
-                    <label for="nombre">Nombre Completo:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
+<main class="auth-main">
+    <div class="auth-container">
+        <div class="auth-panel-left">
+            <div class="auth-panel-content">
+                <h2>Crea tu Cuenta</h2>
+                <p>Regístrate para una experiencia de compra más rápida y personalizada.</p>
+            </div>
+        </div>
+        <div class="auth-panel-right">
+            <div class="auth-form">
+                <h1>Registro</h1>
+                <?php if ($error): ?>
+                    <div class="alert alert-error"><?php echo $error; ?></div>
+                <?php endif; ?>
+                <?php if ($success): ?>
+                    <div class="alert alert-success"><?php echo $success; ?></div>
+                <?php endif; ?>
                 
-                <div class="form-group">
-                    <label for="email">Correo Electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm_password">Confirmar Contraseña:</label>
+                        <input type="password" id="confirm_password" name="confirm_password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </form>
                 
-                <div class="form-group">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirm_password">Confirmar Contraseña:</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Registrarse</button>
-            </form>
-            
-            <p>¿Ya tienes cuenta? <a href="/proyecto-01/auth/login.php">Inicia sesión aquí</a></p>
+                <p>¿Ya tienes cuenta? <a href="/proyecto-01/auth/login.php">Inicia sesión aquí</a></p>
+            </div>
         </div>
     </div>
 </main>

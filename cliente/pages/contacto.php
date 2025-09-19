@@ -8,6 +8,7 @@ include '../../public/componentes/header.php';
 
 <!-- 3. Link al CSS -->
 <link rel="stylesheet" href="/proyecto-01/cliente/styles/contacto.css">
+<!-- <link rel="stylesheet" href="/proyecto-01/cliente/styles/header.css"> -->
 
 <!-- 4. Contenido HTML -->
 <main>
@@ -22,7 +23,7 @@ include '../../public/componentes/header.php';
                     <div>
                         <h3>Dirección</h3>
                         <p>Satélite Norte, La Paz - Bolivia</p>
-                    </div>
+                    </div>j
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>

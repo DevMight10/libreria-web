@@ -50,29 +50,37 @@ include '../public/componentes/header.php';
 
 <link rel="stylesheet" href="/proyecto-01/cliente/styles/login.css">
 
-<main>
-    <div class="container">
-        <div class="auth-form">
-            <h1>Iniciar Sesión</h1>
-            <?php if ($error): ?>
-                <div class="alert alert-error"><?php echo $error; ?></div>
-            <?php endif; ?>
-            
-            <form method="POST">
-                <div class="form-group">
-                    <label for="email">Correo Electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
+<main class="auth-main">
+    <div class="auth-container">
+        <div class="auth-panel-left">
+            <div class="auth-panel-content">
+                <h2>Bienvenido de Nuevo</h2>
+                <p>Inicia sesión para acceder a tus pedidos, gestionar tu cuenta y más.</p>
+            </div>
+        </div>
+        <div class="auth-panel-right">
+            <div class="auth-form">
+                <h1>Iniciar Sesión</h1>
+                <?php if ($error): ?>
+                    <div class="alert alert-error"><?php echo $error; ?></div>
+                <?php endif; ?>
                 
-                <div class="form-group">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </form>
                 
-                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-            </form>
-            
-            <p>¿No tienes cuenta? <a href="/proyecto-01/auth/registro.php">Regístrate aquí</a></p>
+                <p>¿No tienes cuenta? <a href="/proyecto-01/auth/registro.php">Regístrate aquí</a></p>
+            </div>
         </div>
     </div>
 </main>
