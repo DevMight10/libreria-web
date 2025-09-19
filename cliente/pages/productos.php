@@ -2,14 +2,17 @@
 // 1. Incluir el controlador
 require_once '../controllers/productos_controller.php';
 
+// Page-specific styles
+$page_specific_styles = '<link rel="stylesheet" href="/proyecto-01/cliente/styles/lista-productos.css">';
+
 // 2. Incluir el header
 include '../../public/componentes/header.php';
+
 ?>
 
-<!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/lista-productos.css">
-
 <!-- 4. Contenido HTML -->
+    <link rel="stylesheet" href="/proyecto-01/cliente/styles/header.css">
+
 <main>
     <div class="container">
         <?php if ($mensaje): ?>
@@ -48,41 +51,41 @@ include '../../public/componentes/header.php';
             <?php else: ?>
                 <?php foreach ($productos as $producto): ?>
                     <div class="product-card">
+                        <p class="stock <?php echo ($producto['stock'] <= 5 && $producto['stock'] > 0) ? 'low-stock' : ''; ?>">
+                            <?php
+                            if ($producto['stock'] > 0) {
+                                echo 'Disponibles: ' . $producto['stock'];
+                            } else {
+                                echo '<span class="out-of-stock">Agotado</span>';
+                            }
+                            ?>
+                        </p>
                         <img src="/proyecto-01/public/<?php echo $producto['imagen']; ?>"
                             alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
                         <div class="product-info">
                             <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
                             <p class="category"><?php echo htmlspecialchars($producto['categoria_nombre']); ?></p>
                             <p class="price"><?php echo formatPrice($producto['precio']); ?></p>
-                            <p class="stock <?php echo ($producto['stock'] <= 5 && $producto['stock'] > 0) ? 'low-stock' : ''; ?>">
-                                <?php
-                                if ($producto['stock'] > 0) {
-                                    echo 'Disponibles: ' . $producto['stock'];
-                                } else {
-                                    echo '<span class="out-of-stock">Agotado</span>';
-                                }
-                                ?>
-                            </p>
-                            <div class="product-actions">
-                                <a href="/proyecto-01/cliente/pages/producto_detalle.php?id=<?php echo $producto['id']; ?>"
-                                    class="btn btn-secondary">Ver Detalles</a>
-                                <?php if (isLoggedIn()): ?>
-                                    <?php if ($producto['stock'] > 0): ?>
-                                        <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" style="display: inline;">
-                                            <input type="hidden" name="action" value="add">
-                                            <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
-                                            <input type="hidden" name="return_url" value="/proyecto-01/cliente/pages/productos.php?<?php echo http_build_query($_GET); ?>">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fas fa-cart-plus"></i> Agregar
-                                            </button>
-                                        </form>
-                                    <?php else: ?>
-                                        <button class="btn btn-primary" disabled>Agotado</button>
-                                    <?php endif; ?>
+                        </div>
+                        <div class="product-actions">
+                            <a href="/proyecto-01/cliente/pages/producto_detalle.php?id=<?php echo $producto['id']; ?>"
+                                class="btn btn-secondary">Ver Detalles</a>
+                            <?php if (isLoggedIn()): ?>
+                                <?php if ($producto['stock'] > 0): ?>
+                                    <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" style="display: inline;">
+                                        <input type="hidden" name="action" value="add">
+                                        <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
+                                        <input type="hidden" name="return_url" value="/proyecto-01/cliente/pages/productos.php?<?php echo http_build_query($_GET); ?>">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-cart-plus"></i> Agregar
+                                        </button>
+                                    </form>
                                 <?php else: ?>
-                                    <a href="/proyecto-01/auth/login.php" class="btn btn-primary">Inicia sesión para comprar</a>
+                                    <button class="btn btn-primary" disabled>Agotado</button>
                                 <?php endif; ?>
-                            </div>
+                            <?php else: ?>
+                                <a href="/proyecto-01/auth/login.php" class="btn btn-primary">Inicia sesión para comprar</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
