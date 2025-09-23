@@ -9,7 +9,7 @@ include '../../public/componentes/admin_header.php';
 ?>
 
 <!-- 3. Link al CSS (puede ser uno común para ambos formularios) -->
-<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/agregar_producto.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/agregar_libro.css">
 
 <!-- 4. Contenido HTML -->
 <main class="container">
