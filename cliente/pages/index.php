@@ -9,8 +9,8 @@ include '../../public/componentes/header.php';
 <!-- 3. Link al CSS -->
 <link rel="stylesheet" href="/proyecto-01/cliente/styles/home.css">
 
-<!-- 4. Contenido HTML
-    <!-- Hero Section -->
+<!-- 4. Contenido HTML -->
+     
     <section class="hero" style="background-image: url('/proyecto-01/public/imgs/libreria.jpg');">
         <div class="hero-overlay"></div>
         <div class="container hero-content">

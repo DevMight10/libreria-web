@@ -2,14 +2,13 @@
   background-color: #2c3e50; /* Dark blue-gray */
   color: #ecf0f1; /* Light gray */
   margin-top: 60px;
-  border-top: 4px solid var(--primary-color, #ff9eb5); /* Use primary color from base.css */
 }
 
 .footer-grid {
   display: flex;
   gap: 48px;
   justify-content: space-between;
-  padding: 48px 0;
+  padding: 25px 0;
 }
 
 .footer-col h4 {

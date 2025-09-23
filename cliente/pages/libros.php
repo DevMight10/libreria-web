@@ -63,6 +63,7 @@ include '../../public/componentes/header.php';
                     </a>
                     <div class="libro-info">
                         <h3><?php echo htmlspecialchars($libro['nombre']); ?></h3>
+                        <p class="author"><?php echo htmlspecialchars($libro['autor']); ?></p>
                         <p class="category"><?php echo htmlspecialchars($libro['genero_nombre']); ?></p>
                         <p class="price"><?php echo formatPrice($libro['precio']); ?></p>
                     </div>

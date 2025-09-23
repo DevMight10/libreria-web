@@ -3,7 +3,7 @@
     <div class="footer-col">
       <h4>Librería Adrimarth</h4>
       <ul>
-        <li><a href="/proyecto-01/cliente/pages/productos.php">Catálogo</a></li>
+        <li><a href="/proyecto-01/cliente/pages/libros.php">Catálogo</a></li>
         <li><a href="#">Promociones</a></li>
         <li><a href="#">Novedades</a></li>
       </ul>
@@ -22,7 +22,7 @@
       <h4>Contacto</h4>
       <address>
         Satélite Norte, Warnes<br>
-        <a href="tel:+59170000000">+591 70000000</a><br>
+        <a href="tel:+59171234567">+591 71234567</a><br>
         <a href="mailto:info@adrimarth.com">info@adrimarth.com</a>
       </address>
     </div>

@@ -87,11 +87,12 @@ class LibroModel {
     }
 
     public function add($data) {
-        $sql = "INSERT INTO libros (nombre, descripcion, precio, genero_id, stock, activo, destacado, imagen, fecha_creacion) 
-                VALUES (:nombre, :descripcion, :precio, :genero_id, :stock, :activo, :destacado, :imagen, NOW())";
+        $sql = "INSERT INTO libros (nombre, autor, descripcion, precio, genero_id, stock, activo, destacado, imagen, fecha_creacion) 
+                VALUES (:nombre, :autor, :descripcion, :precio, :genero_id, :stock, :activo, :destacado, :imagen, NOW())";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
             ':nombre' => $data['nombre'],
+            ':autor' => $data['autor'],
             ':descripcion' => $data['descripcion'],
             ':precio' => $data['precio'],
             ':genero_id' => $data['genero_id'],
@@ -105,6 +106,7 @@ class LibroModel {
     public function update($id, $data) {
         $sql = "UPDATE libros SET 
                     nombre = :nombre, 
+                    autor = :autor, 
                     descripcion = :descripcion, 
                     precio = :precio, 
                     genero_id = :genero_id, 
@@ -116,6 +118,7 @@ class LibroModel {
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
             ':nombre' => $data['nombre'],
+            ':autor' => $data['autor'],
             ':descripcion' => $data['descripcion'],
             ':precio' => $data['precio'],
             ':genero_id' => $data['genero_id'],

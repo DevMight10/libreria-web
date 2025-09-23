@@ -22,8 +22,8 @@ include '../../public/componentes/header.php';
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
                         <h3>Dirección</h3>
-                        <p>Satélite Norte, La Paz - Bolivia</p>
-                    </div>j
+                        <p>Satélite Norte, Santa Cruz - Bolivia</p>
+                    </div>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>

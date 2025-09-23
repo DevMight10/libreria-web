@@ -20,6 +20,9 @@ require_once __DIR__ . '/../../auth/functions.php';
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <?php echo $page_specific_styles ?? ''; ?>
+
+    <!-- Estilos de Hover Globales (Cargados al final para máxima prioridad) -->
+    <link rel="stylesheet" href="/proyecto-01/cliente/styles/hover-global.css">
 </head>
 <body>
     <header class="site-header">
@@ -29,7 +32,7 @@ require_once __DIR__ . '/../../auth/functions.php';
             <nav class="main-nav">
                 <ul>
                     <li><a href="/proyecto-01/cliente/pages/index.php">Inicio</a></li>
-<li><a href="/proyecto-01/cliente/pages/libros.php">Libros</a></li>
+                    <li><a href="/proyecto-01/cliente/pages/libros.php">Libros</a></li>
                     <li><a href="/proyecto-01/cliente/pages/contacto.php">Contacto</a></li>
                 </ul>
             </nav>
@@ -75,7 +78,7 @@ require_once __DIR__ . '/../../auth/functions.php';
          <nav>
             <ul>
                 <li><a href="/proyecto-01/cliente/pages/index.php">Inicio</a></li>
-                <li><a href="/proyecto-01/cliente/pages/productos.php">Productos</a></li>
+                <li><a href="/proyecto-01/cliente/pages/libros.php">Libros</a></li>
                 <li><a href="/proyecto-01/cliente/pages/contacto.php">Contacto</a></li>
             </ul>
         </nav>

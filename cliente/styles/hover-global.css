@@ -1,0 +1,50 @@
+/* =============================================== */
+/* Estilos de Hover Globales para la Navegación */
+/* =============================================== */
+
+/* --- Efecto de subrayado para links principales (Inicio, Libros, Contacto) --- */
+
+/* Base del subrayado (invisible por defecto) */
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px; /* Un poco más grueso para que se note bien */
+    background-color: var(--prussian-blue);
+    transition: width 0.4s ease;
+}
+
+.main-nav a:hover {
+    color: var(--blue-green); /* Cambia el color del texto al pasar el cursor */
+}
+
+/* El efecto al pasar el cursor o si el link está activo */
+.main-nav a:hover::after, 
+.main-nav a.active::after {
+    width: 100%;
+    background-color: var(--blue-green);
+}
+
+/* --- Efecto de color y zoom para iconos de la derecha (carrito, perfil, etc.) --- */
+
+/* Base de la transición para los iconos */
+.icon-link {
+    transition: color 0.3s, transform 0.3s;
+}
+
+/* El efecto al pasar el cursor */
+.icon-link:hover {
+    color: var(--blue-green); /* Se volverá azul */
+    transform: scale(1.1); /* Se agrandará ligeramente */
+}
+
+/* --- Efecto de color para el Logo --- */
+.logo {
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--blue-green);
+}

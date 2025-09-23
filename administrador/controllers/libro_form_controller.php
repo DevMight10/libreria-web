@@ -26,7 +26,7 @@ if ($is_edit) {
     $page_title = 'Agregar Libro';
     // Inicializar un array de libro vacío para que el formulario no de errores
     $libro = [
-        'id' => null, 'nombre' => '', 'descripcion' => '', 'precio' => '',
+        'id' => null, 'nombre' => '', 'autor' => '', 'descripcion' => '', 'precio' => '',
         'genero_id' => null, 'stock' => 0, 'activo' => 1, 'destacado' => 0, 'imagen' => ''
     ];
 }
@@ -35,6 +35,7 @@ if ($is_edit) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
         'nombre' => $_POST['nombre'] ?? '',
+        'autor' => $_POST['autor'] ?? '',
         'descripcion' => $_POST['descripcion'] ?? '',
         'precio' => $_POST['precio'] ?? 0,
         'genero_id' => $_POST['genero_id'] ?? null,

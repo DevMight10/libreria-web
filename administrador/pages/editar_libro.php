@@ -24,6 +24,11 @@ include '../../public/componentes/admin_header.php';
             <label for="nombre">Nombre del Libro</label>
             <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo htmlspecialchars($libro['nombre']); ?>" required>
         </div>
+
+        <div class="form-group">
+            <label for="autor">Autor</label>
+            <input type="text" id="autor" name="autor" class="form-control" value="<?php echo htmlspecialchars($libro['autor']); ?>" required>
+        </div>
         
         <div class="form-group">
             <label for="descripcion">Descripción</label>

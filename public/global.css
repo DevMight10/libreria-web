@@ -3,15 +3,14 @@ html {
 }
 
 :root {
-  --color-primary: #fb8500;      /* Naranja */
-  --color-primary-dark: #e67300; /* Naranja oscuro para hover */
-  --color-secondary: #219ebc;   /* Azul medio */
-  --color-accent: #ffb703;      /* Amarillo */
-  --color-dark: #023047;        /* Azul oscuro */
-  --color-light: #8ecae6;      /* Azul claro */
-  --color-white: #fff;
-  --color-gray: #f8f9fa;
-  --color-text: #495057;
+    --sky-blue: #8ecae6;
+    --blue-green: #219ebc;
+    --prussian-blue: #023047;
+    --selective-yellow: #ffb703;
+    --sandy-brown: #fb8500;
+    --white: #ffffff;
+    --off-white: #f8f9fa;
+    --gray: #6c757d;
 }
 
 *{
@@ -55,17 +54,40 @@ main {
 
 /* Botón Primario (Naranja) */
 .btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--sandy-brown);
+  color: var(--white);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary-dark);
+  background-color: var(--selective-yellow);
+  color: var(--prussian-blue);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
-.btn:active, .btn-primary:active {
+/* Botón Secundario (Azul) */
+.btn-secondary {
+  background-color: var(--blue-green);
+  color: var(--white);
+}
+
+.btn-secondary:hover {
+  background-color: var(--prussian-blue);
+  transform: translateY(-2px);
+}
+
+/* Botón de Peligro (Rojo) */
+.btn-danger {
+  background-color: #dc3545;
+  color: var(--white);
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+.btn:active {
   transform: translateY(0);
   box-shadow: none;
 }

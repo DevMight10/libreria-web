@@ -23,49 +23,69 @@ include '../../public/componentes/header.php';
                 <div class="order-success">
                     <h2>¡Gracias por tu pedido!</h2>
                     <p>Nos pondremos en contacto contigo pronto para coordinar el pago y la entrega.</p>
+                    <br>
                     <a href="/proyecto-01/cliente/pages/libros.php" class="btn btn-primary">Seguir Viendo Libros</a>
                 </div>
             <?php endif; ?>
         <?php else: ?>
-            <div class="order-summary">
-                <h2>Resumen del Pedido</h2>
-                
-                <div class="order-items">
-                    <?php foreach ($carrito_items as $libro_id => $item): ?>
-                        <div class="order-item">
-                            <img src="/proyecto-01/public/<?php echo htmlspecialchars($item['imagen']); ?>" 
-                                 alt="<?php echo htmlspecialchars($item['nombre']); ?>">
-                            <div class="item-details">
-                                <h3><?php echo htmlspecialchars($item['nombre']); ?></h3>
-                                <p>Cantidad: <?php echo $item['cantidad']; ?></p>
-                                <p>Precio: <?php echo formatPrice($item['precio']); ?></p>
+            <div class="checkout-grid">
+                <!-- Columna Izquierda: Información -->
+                <div class="checkout-info">
+                    <div class="info-section">
+                        <h2>1. Datos de Contacto</h2>
+                        <p><strong>Nombre:</strong> <?php echo htmlspecialchars($usuario['nombre']); ?></p>
+                        <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['email']); ?></p>
+                        <p>Usaremos estos datos para contactarte y coordinar la entrega.</p>
+                        <a href="/proyecto-01/cliente/pages/perfil.php" class="link-editar">Editar perfil</a>
+                    </div>
+
+                    <div class="info-section">
+                        <h2>2. Pasos Finales y Confirmación</h2>
+                        <ul>
+                            <li><strong>Revisa tu Pedido:</strong> Asegúrate de que los libros y las cantidades en el resumen de la derecha sean correctas.</li>
+                            <li><strong>Registro en el Sistema:</strong> Al hacer clic en "Confirmar Pedido", tu solicitud quedará registrada en nuestro sistema.</li>
+                            <li><strong>Coordinación Manual:</strong> Nuestro equipo de ventas se pondrá en contacto contigo para coordinar personalmente los detalles de la entrega y el pago.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Resumen del Pedido -->
+                <div class="checkout-summary">
+                    <h2>Resumen del Pedido</h2>
+                    <div class="summary-items">
+                        <?php foreach ($carrito_items as $libro_id => $item): ?>
+                            <div class="summary-item">
+                                <span class="item-qty"><?php echo $item['cantidad']; ?>x</span>
+                                <span class="item-name"><?php echo htmlspecialchars($item['nombre']); ?></span>
+                                <span class="item-price"><?php echo formatPrice($item['precio'] * $item['cantidad']); ?></span>
                             </div>
-                            <div class="item-total">
-                                <?php echo formatPrice($item['precio'] * $item['cantidad']); ?>
-                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <hr>
+                    <div class="summary-totals">
+                        <div class="total-line">
+                            <span>Subtotal:</span>
+                            <span><?php echo formatPrice($cart->getTotal()); ?></span>
                         </div>
-                    <?php endforeach; ?>
+                        <div class="total-line">
+                            <span>Envío:</span>
+                            <span>A coordinar</span>
+                        </div>
+                        <hr>
+                        <div class="total-line final-total">
+                            <span>Total del Pedido:</span>
+                            <span><?php echo formatPrice($cart->getTotal()); ?></span>
+                        </div>
+                    </div>
+                    <form action="/proyecto-01/cliente/pages/confirmar_pedido.php" method="POST" class="confirm-form">
+                        <button type="submit" name="confirmar_pedido" class="btn btn-primary btn-full-width">
+                            Confirmar Pedido
+                        </button>
+                    </form>
+                    <div class="back-link-container">
+                        <a href="/proyecto-01/cliente/pages/carrito.php" class="link-volver">Volver al Carrito</a>
+                    </div>
                 </div>
-                
-                <div class="order-total">
-                    <h3>Total: <?php echo formatPrice($cart->getTotal()); ?></h3>
-                </div>
-                
-                <div class="order-info">
-                    <h3>Información Importante</h3>
-                    <ul>
-                        <li>Tu pedido será procesado y nos pondremos en contacto contigo</li>
-                        <li>Coordinaremos el método de pago y entrega</li>
-                        <li>El estado de tu pedido será actualizado en nuestro sistema</li>
-                    </ul>
-                </div>
-                
-                <form action="/proyecto-01/cliente/pages/confirmar_pedido.php" method="POST" class="confirm-form">
-                    <button type="submit" name="confirmar_pedido" class="btn btn-primary">
-                        Confirmar Pedido
-                    </button>
-                    <a href="/proyecto-01/cliente/pages/carrito.php" class="btn btn-secondary">Volver al Carrito</a>
-                </form>
             </div>
         <?php endif; ?>
     </div>

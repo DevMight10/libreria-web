@@ -32,6 +32,7 @@ include '../../public/componentes/header.php';
 
             <div class="product-info">
                 <h1><?php echo htmlspecialchars($libro['nombre']); ?></h1>
+                <p class="author">Por: <?php echo htmlspecialchars($libro['autor']); ?></p>
                 <p class="category">Género: <?php echo htmlspecialchars($libro['genero_nombre']); ?></p>
                 <p class="price"><?php echo formatPrice($libro['precio']); ?></p>
 

@@ -24,6 +24,7 @@ CREATE TABLE generos (
 CREATE TABLE libros (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
+    autor VARCHAR(255) NOT NULL,
     descripcion TEXT NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
     genero_id INT,

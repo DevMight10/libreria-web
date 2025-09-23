@@ -5,12 +5,17 @@ require_once __DIR__ . '/../../auth/session.php';
 require_once __DIR__ . '/../../auth/functions.php';
 require_once __DIR__ . '/../models/Cart.php';
 require_once __DIR__ . '/../models/PedidoModel.php';
+require_once __DIR__ . '/../../administrador/models/UsuarioModel.php';
 
 requireLogin();
 
 // 2. Inicializar Modelos
 $cart = new Cart($pdo, $_SESSION['usuario_id']);
 $pedidoModel = new PedidoModel($pdo);
+$usuarioModel = new UsuarioModel($pdo);
+
+// Obtener datos del usuario logueado
+$usuario = $usuarioModel->find($_SESSION['usuario_id']);
 
 $page_title = 'Confirmar Pedido';
 $mensaje = '';
@@ -19,7 +24,7 @@ $mensaje = '';
 $carrito_items = $cart->getItems();
 
 if (empty($carrito_items)) {
-    header('Location: /proyecto-01/cliente/pages/productos.php');
+    header('Location: /proyecto-01/cliente/pages/libros.php');
     exit();
 }
 

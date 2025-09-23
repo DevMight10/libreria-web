@@ -51,6 +51,7 @@ include '../../public/componentes/admin_header.php';
                     <th>ID</th>
                     <th>Imagen</th>
                     <th>Nombre</th>
+                    <th>Autor</th>
                     <th>Género</th>
                     <th>Precio</th>
                     <th>Stock</th>
@@ -72,6 +73,7 @@ include '../../public/componentes/admin_header.php';
                                 <img src="/proyecto-01/public/<?php echo htmlspecialchars($libro['imagen']); ?>" alt="<?php echo htmlspecialchars($libro['nombre']); ?>" width="50">
                             </td>
                             <td><?php echo htmlspecialchars($libro['nombre']); ?></td>
+                            <td><?php echo htmlspecialchars($libro['autor']); ?></td>
                             <td><?php echo htmlspecialchars($libro['genero_nombre']); ?></td>
                             <td><?php echo formatPrice($libro['precio']); ?></td>
                             <td><?php echo $libro['stock']; ?></td>
