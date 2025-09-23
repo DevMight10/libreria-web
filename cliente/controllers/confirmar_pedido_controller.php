@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../auth/session.php';
 require_once __DIR__ . '/../../auth/functions.php';
@@ -24,7 +25,7 @@ $mensaje = '';
 $carrito_items = $cart->getItems();
 
 if (empty($carrito_items)) {
-    header('Location: /proyecto-01/cliente/pages/libros.php');
+    header('Location: ' . BASE_URL . '/cliente/pages/libros.php');
     exit();
 }
 
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirmar_pedido'])) {
 
     if (!empty($errores_stock)) {
         $_SESSION['mensaje_error'] = implode('<br>', $errores_stock);
-        header('Location: /proyecto-01/cliente/pages/carrito.php');
+        header('Location: ' . BASE_URL . '/cliente/pages/carrito.php');
         exit;
     }
 

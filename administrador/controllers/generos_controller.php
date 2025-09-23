@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once '../../config/config.php';
 require_once '../../config/database.php';
 require_once '../../auth/session.php';
 require_once '../models/Genero.php';
@@ -22,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($nombre)) {
             $error = "El nombre del género no puede estar vacío.";
         } elseif ($generoModel->add($nombre)) {
-            header("Location: /proyecto-01/administrador/pages/generos.php?mensaje=Género agregado con éxito");
+            header("Location: " . BASE_URL . "/administrador/pages/generos.php?mensaje=Género agregado con éxito");
             exit;
         } else {
             $error = "Error al agregar el género.";
@@ -32,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action == 'delete') {
         $id = $_POST['id'] ?? 0;
         if ($generoModel->isUsed($id)) {
-            header("Location: /proyecto-01/administrador/pages/generos.php?error=No se puede eliminar, el género está en uso.");
+            header("Location: " . BASE_URL . "/administrador/pages/generos.php?error=No se puede eliminar, el género está en uso.");
             exit;
         } elseif ($generoModel->delete($id)) {
-            header("Location: /proyecto-01/administrador/pages/generos.php?mensaje=Género eliminado con éxito");
+            header("Location: " . BASE_URL . "/administrador/pages/generos.php?mensaje=Género eliminado con éxito");
             exit;
         } else {
             $error = "Error al eliminar el género.";

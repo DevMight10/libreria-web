@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../auth/session.php';
 require_once __DIR__ . '/../../auth/functions.php';
@@ -12,7 +13,7 @@ $libroModel = new LibroModel($pdo);
 $libro_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($libro_id <= 0) {
-    header('Location: /proyecto-01/cliente/pages/libros.php');
+    header('Location: ' . BASE_URL . '/cliente/pages/libros.php');
     exit();
 }
 
@@ -20,7 +21,7 @@ $libro = $libroModel->find($libro_id);
 
 // Si el libro no existe o no está activo, redirigir
 if (!$libro || !$libro['activo']) {
-    header('Location: /proyecto-01/cliente/pages/libros.php');
+    header('Location: ' . BASE_URL . '/cliente/pages/libros.php');
     exit();
 }
 

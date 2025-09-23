@@ -1,4 +1,5 @@
 <?php
+require_once '../config/config.php';
 require_once '../config/database.php';
 require_once 'session.php';
 
@@ -37,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // --- Fin de la carga del carrito ---
 
         // Redirigir a la página anterior o al inicio
-        $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : '/proyecto-01/cliente/pages/index.php';
+        $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : BASE_URL . '/cliente/pages/index.php';
         header("Location: $redirect");
         exit();
     } else {
@@ -48,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include '../public/componentes/header.php';
 ?>
 
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/login.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/login.css">
 
 <main class="auth-main">
     <div class="auth-container">
@@ -79,7 +80,7 @@ include '../public/componentes/header.php';
                     <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                 </form>
                 
-                <p>¿No tienes cuenta? <a href="/proyecto-01/auth/registro.php">Regístrate aquí</a></p>
+                <p>¿No tienes cuenta? <a href="<?php echo BASE_URL; ?>/auth/registro.php">Regístrate aquí</a></p>
             </div>
         </div>
     </div>

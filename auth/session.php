@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../config/config.php';
 session_start();
 
 function isLoggedIn() {
@@ -11,14 +12,14 @@ function isAdmin() {
 
 function requireLogin() {
     if (!isLoggedIn()) {
-        header('Location: /proyecto-01/auth/login.php');
+        header('Location: ' . BASE_URL . '/auth/login.php');
         exit();
     }
 }
 
 function requireAdmin() {
     if (!isAdmin()) {
-        header('Location: /proyecto-01/cliente/pages/index.php');
+        header('Location: ' . BASE_URL . '/cliente/pages/index.php');
         exit();
     }
 }

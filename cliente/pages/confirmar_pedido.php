@@ -7,7 +7,7 @@ include '../../public/componentes/header.php';
 ?>
 
 <!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/confirmar_pedido.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/confirmar_pedido.css">
 
 <!-- 4. Contenido HTML -->
 <main>
@@ -24,7 +24,7 @@ include '../../public/componentes/header.php';
                     <h2>¡Gracias por tu pedido!</h2>
                     <p>Nos pondremos en contacto contigo pronto para coordinar el pago y la entrega.</p>
                     <br>
-                    <a href="/proyecto-01/cliente/pages/libros.php" class="btn btn-primary">Seguir Viendo Libros</a>
+                    <a href="<?php echo BASE_URL; ?>/cliente/pages/libros.php" class="btn btn-primary">Seguir Viendo Libros</a>
                 </div>
             <?php endif; ?>
         <?php else: ?>
@@ -36,7 +36,7 @@ include '../../public/componentes/header.php';
                         <p><strong>Nombre:</strong> <?php echo htmlspecialchars($usuario['nombre']); ?></p>
                         <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['email']); ?></p>
                         <p>Usaremos estos datos para contactarte y coordinar la entrega.</p>
-                        <a href="/proyecto-01/cliente/pages/perfil.php" class="link-editar">Editar perfil</a>
+                        <a href="<?php echo BASE_URL; ?>/cliente/pages/perfil.php" class="link-editar">Editar perfil</a>
                     </div>
 
                     <div class="info-section">
@@ -77,13 +77,13 @@ include '../../public/componentes/header.php';
                             <span><?php echo formatPrice($cart->getTotal()); ?></span>
                         </div>
                     </div>
-                    <form action="/proyecto-01/cliente/pages/confirmar_pedido.php" method="POST" class="confirm-form">
+                    <form action="<?php echo BASE_URL; ?>/cliente/pages/confirmar_pedido.php" method="POST" class="confirm-form">
                         <button type="submit" name="confirmar_pedido" class="btn btn-primary btn-full-width">
                             Confirmar Pedido
                         </button>
                     </form>
                     <div class="back-link-container">
-                        <a href="/proyecto-01/cliente/pages/carrito.php" class="link-volver">Volver al Carrito</a>
+                        <a href="<?php echo BASE_URL; ?>/cliente/pages/carrito.php" class="link-volver">Volver al Carrito</a>
                     </div>
                 </div>
             </div>

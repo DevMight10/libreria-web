@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../../config/config.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,9 +8,9 @@
     <title><?php echo isset($page_title) ? $page_title . ' - ' : ''; ?>Admin - Librería Adrimarth</title>
 
     <!-- Header específico para admin con rutas relativas correctas -->
-    <link rel="stylesheet" href="/proyecto-01/administrador/styles/header.css">
-    <link rel="stylesheet" href="/proyecto-01/public/global.css">
-    <link rel="stylesheet" href="/proyecto-01/administrador/styles/footer.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/header.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/global.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/footer.css">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -22,14 +23,14 @@
                 <p>Panel de Administración</p>
             </div>
             <nav class="nav-menu">
-                <a href="/proyecto-01/cliente/pages/index.php">Ver Sitio</a>
-                <a href="/proyecto-01/administrador/pages/index.php">Dashboard</a>
-                <a href="/proyecto-01/administrador/pages/generos.php">Géneros</a> 
-                <a href="/proyecto-01/administrador/pages/libros.php">Libros</a>
-                <a href="/proyecto-01/administrador/pages/pedidos.php">Pedidos</a>
-                <a href="/proyecto-01/administrador/pages/mensajes.php">Mensajes</a>
-                <a href="/proyecto-01/administrador/pages/usuarios.php">Usuarios</a>
-                <a href="/proyecto-01/auth/logout.php">Salir</a>
+                <a href="<?php echo BASE_URL; ?>/cliente/pages/index.php">Ver Sitio</a>
+                <a href="<?php echo BASE_URL; ?>/administrador/pages/index.php">Dashboard</a>
+                <a href="<?php echo BASE_URL; ?>/administrador/pages/generos.php">Géneros</a> 
+                <a href="<?php echo BASE_URL; ?>/administrador/pages/libros.php">Libros</a>
+                <a href="<?php echo BASE_URL; ?>/administrador/pages/pedidos.php">Pedidos</a>
+                <a href="<?php echo BASE_URL; ?>/administrador/pages/mensajes.php">Mensajes</a>
+                <a href="<?php echo BASE_URL; ?>/administrador/pages/usuarios.php">Usuarios</a>
+                <a href="<?php echo BASE_URL; ?>/auth/logout.php">Salir</a>
             </nav>
         </div>
     </header>

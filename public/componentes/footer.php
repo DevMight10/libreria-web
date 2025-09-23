@@ -3,7 +3,7 @@
     <div class="footer-col">
       <h4>Librería Adrimarth</h4>
       <ul>
-        <li><a href="/proyecto-01/cliente/pages/libros.php">Catálogo</a></li>
+        <li><a href="<?php echo BASE_URL; ?>/cliente/pages/libros.php">Catálogo</a></li>
         <li><a href="#">Promociones</a></li>
         <li><a href="#">Novedades</a></li>
       </ul>
@@ -12,7 +12,7 @@
     <div class="footer-col">
       <h4>Ayuda</h4>
       <ul>
-        <li><a href="/proyecto-01/cliente/pages/contacto.php">Contacto</a></li>
+        <li><a href="<?php echo BASE_URL; ?>/cliente/pages/contacto.php">Contacto</a></li>
         <li><a href="#">Envíos</a></li>
         <li><a href="#">Devoluciones</a></li>
       </ul>
@@ -34,4 +34,3 @@
     </div>
   </div>
 </footer>
-

@@ -1,11 +1,12 @@
 <?php
 // 1. Incluir el controlador
 require_once '../controllers/libro_detalle_controller.php';
+require_once '../../config/config.php';
 
 // 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/libro-detalle.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/libro-detalle.css">
 
 
 <main>
@@ -26,7 +27,7 @@ include '../../public/componentes/header.php';
 
         <div class="product-detail">
             <div class="product-image">
-                <img src="/proyecto-01/public/<?php echo $libro['imagen']; ?>"
+                <img src="<?php echo BASE_URL; ?>/public/<?php echo $libro['imagen']; ?>"
                     alt="<?php echo htmlspecialchars($libro['nombre']); ?>">
             </div>
 
@@ -53,7 +54,7 @@ include '../../public/componentes/header.php';
 
                 <?php if (isLoggedIn()): ?>
                     <?php if ($libro['stock'] > 0): ?>
-                        <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" class="add-to-cart-form">
+                        <form action="<?php echo BASE_URL; ?>/cliente/pages/carrito.php" method="POST" class="add-to-cart-form">
                             <input type="hidden" name="action" value="add">
                             <input type="hidden" name="id" value="<?php echo $libro['id']; ?>">
                             <input type="hidden" name="return_url" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -69,7 +70,7 @@ include '../../public/componentes/header.php';
                         <p>Este libro no está disponible actualmente.</p>
                     <?php endif; ?>
                 <?php else: ?>
-                    <a href="/proyecto-01/auth/login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
+                    <a href="<?php echo BASE_URL; ?>/auth/login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
                         class="btn btn-primary">Inicia sesión para comprar</a>
                 <?php endif; ?>
             </div>

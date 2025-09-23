@@ -7,8 +7,8 @@ include '../../public/componentes/header.php';
 ?>
 
 <!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/contacto.css">
-<!-- <link rel="stylesheet" href="/proyecto-01/cliente/styles/header.css"> -->
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/contacto.css">
+<!-- <link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/header.css"> -->
 
 <!-- 4. Contenido HTML -->
 <main>
@@ -58,7 +58,7 @@ include '../../public/componentes/header.php';
                     </div>
                 <?php endif; ?>
                 
-                <form action="/proyecto-01/cliente/pages/contacto.php" method="POST">
+                <form action="<?php echo BASE_URL; ?>/cliente/pages/contacto.php" method="POST">
                     <div class="form-group">
                         <label for="nombre">Nombre Completo:</label>
                         <input type="text" id="nombre" name="nombre" required>

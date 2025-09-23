@@ -99,10 +99,25 @@ function uploadAvatar($file, &$error) {
     // Ruta absoluta para mover el archivo
     $ruta_absoluta = PROJECT_ROOT . '/public/' . $ruta_relativa;
 
+    // Verificar si el directorio de destino existe y es escribible
+    $directorio_destino = dirname($ruta_absoluta);
+    if (!is_dir($directorio_destino)) {
+        // Intentar crear el directorio si no existe
+        if (!mkdir($directorio_destino, 0777, true)) {
+            $error = "Error: El directorio de destino no existe y no se pudo crear.";
+            return null;
+        }
+    }
+
+    if (!is_writable($directorio_destino)) {
+        $error = "Error: El directorio de destino no tiene permisos de escritura.";
+        return null;
+    }
+
     if (move_uploaded_file($file['tmp_name'], $ruta_absoluta)) {
         return $ruta_relativa; // Devolver la ruta relativa para guardarla en la BD
     } else {
-        $error = "Error al mover el archivo subido.";
+        $error = "Error al mover el archivo subido. Código de error: " . $file['error'];
         return null;
     }
 }

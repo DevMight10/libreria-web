@@ -1,4 +1,6 @@
 <?php
+require_once '../../config/config.php';
+
 // 1. Incluir el controlador
 require_once '../controllers/editar_usuario_controller.php';
 
@@ -7,13 +9,13 @@ include '../../public/componentes/admin_header.php';
 ?>
 
 <!-- 3. Link al CSS (podemos crear uno o reutilizar) -->
-<link rel="stylesheet" href="/proyecto-01/administrador/styles/editar_categoria.css"> <!-- Reutilizando el estilo de editar categoría -->
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/editar_categoria.css"> <!-- Reutilizando el estilo de editar categoría -->
 
 <!-- 4. Contenido HTML -->
 <main class="container">
     <h1><?php echo $page_title; ?></h1>
 
-    <a href="/proyecto-01/administrador/pages/usuarios.php" class="btn btn-secondary mb-3">
+    <a href="<?php echo BASE_URL; ?>/administrador/pages/usuarios.php" class="btn btn-secondary mb-3">
         <i class="fas fa-arrow-left"></i> Volver a Usuarios
     </a>
 
@@ -22,7 +24,7 @@ include '../../public/componentes/admin_header.php';
     endif; ?>
 
     <div class="form-container">
-        <form action="/proyecto-01/administrador/pages/editar_usuario.php?id=<?php echo $usuario['id']; ?>" method="POST">
+        <form action="<?php echo BASE_URL; ?>/administrador/pages/editar_usuario.php?id=<?php echo $usuario['id']; ?>" method="POST">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>

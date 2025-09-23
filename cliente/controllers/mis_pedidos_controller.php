@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../auth/session.php';
 require_once __DIR__ . '/../../auth/functions.php';
@@ -21,11 +22,11 @@ if (isset($_POST['cancelar_pedido'])) {
     
     try {
         if ($pedidoModel->cancelarPedido($pedido_id_a_cancelar, $usuario_id)) {
-            header("Location: /proyecto-01/cliente/pages/mis_pedidos.php?mensaje=Pedido cancelado exitosamente.");
+            header("Location: " . BASE_URL . "/cliente/pages/mis_pedidos.php?mensaje=Pedido cancelado exitosamente.");
             exit;
         }
     } catch (Exception $e) {
-        header("Location: /proyecto-01/cliente/pages/mis_pedidos.php?error=" . urlencode($e->getMessage()));
+        header("Location: " . BASE_URL . "/cliente/pages/mis_pedidos.php?error=" . urlencode($e->getMessage()));
         exit;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+require_once '../../config/config.php';
 // 1. Incluir el controlador
 require_once '../controllers/libros_controller.php';
 
@@ -7,13 +8,13 @@ include '../../public/componentes/admin_header.php';
 ?>
 
 <!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/administrador/styles/productos.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/productos.css">
 
 <!-- 4. Contenido HTML -->
 <main class="container">
     <h1><?php echo $page_title; ?></h1>
 
-    <a href="/proyecto-01/administrador/pages/agregar_libro.php" class="btn btn-primary mb-3">
+    <a href="<?php echo BASE_URL; ?>/administrador/pages/agregar_libro.php" class="btn btn-primary mb-3">
         <i class="fas fa-plus"></i> Agregar Nuevo Libro
     </a>
 
@@ -70,7 +71,7 @@ include '../../public/componentes/admin_header.php';
                         <tr class="<?php echo $libro['activo'] ? '' : 'inactive-row'; ?>">
                             <td><?php echo $libro['id']; ?></td>
                             <td>
-                                <img src="/proyecto-01/public/<?php echo htmlspecialchars($libro['imagen']); ?>" alt="<?php echo htmlspecialchars($libro['nombre']); ?>" width="50">
+                                <img src="<?php echo BASE_URL; ?>/public/<?php echo htmlspecialchars($libro['imagen']); ?>" alt="<?php echo htmlspecialchars($libro['nombre']); ?>" width="50">
                             </td>
                             <td><?php echo htmlspecialchars($libro['nombre']); ?></td>
                             <td><?php echo htmlspecialchars($libro['autor']); ?></td>
@@ -83,7 +84,7 @@ include '../../public/componentes/admin_header.php';
                                 </span>
                             </td>
                             <td>
-                                <a href="/proyecto-01/administrador/pages/libros.php?destacar=1&id=<?php echo $libro['id']; ?>" class="btn-destacar">
+                                <a href="<?php echo BASE_URL; ?>/administrador/pages/libros.php?destacar=1&id=<?php echo $libro['id']; ?>" class="btn-destacar">
                                     <?php if ($libro['destacado']): ?>
                                         <i class="fas fa-star"></i>
                                     <?php else: ?>
@@ -92,15 +93,15 @@ include '../../public/componentes/admin_header.php';
                                 </a>
                             </td>
                             <td>
-                                <a href="/proyecto-01/administrador/pages/editar_libro.php?id=<?php echo $libro['id']; ?>" class="btn btn-sm btn-secondary" title="Editar">
+                                <a href="<?php echo BASE_URL; ?>/administrador/pages/editar_libro.php?id=<?php echo $libro['id']; ?>" class="btn btn-sm btn-secondary" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <?php if ($libro['activo']): ?>
-                                    <a href="/proyecto-01/administrador/pages/libros.php?cambiar_estado=1&id=<?php echo $libro['id']; ?>" class="btn btn-sm btn-warning" title="Desactivar" onclick="return confirm('¿Estás seguro de que quieres DESACTIVAR este libro?');">
+                                    <a href="<?php echo BASE_URL; ?>/administrador/pages/libros.php?cambiar_estado=1&id=<?php echo $libro['id']; ?>" class="btn btn-sm btn-warning" title="Desactivar" onclick="return confirm('¿Estás seguro de que quieres DESACTIVAR este libro?');">
                                         <i class="fas fa-eye-slash"></i>
                                     </a>
                                 <?php else: ?>
-                                    <a href="/proyecto-01/administrador/pages/libros.php?cambiar_estado=1&id=<?php echo $libro['id']; ?>" class="btn btn-sm btn-success" title="Activar" onclick="return confirm('¿Estás seguro de que quieres ACTIVAR este libro?');">
+                                    <a href="<?php echo BASE_URL; ?>/administrador/pages/libros.php?cambiar_estado=1&id=<?php echo $libro['id']; ?>" class="btn btn-sm btn-success" title="Activar" onclick="return confirm('¿Estás seguro de que quieres ACTIVAR este libro?');">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 <?php endif; ?>

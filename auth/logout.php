@@ -1,4 +1,5 @@
 <?php
+require_once '../config/config.php';
 require_once 'session.php';
 
 // 1. Iniciar la sesión (ya está en session.php)
@@ -17,6 +18,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // 4. Redirigir a la página de inicio
-header("Location: /proyecto-01/cliente/pages/index.php");
+header("Location: " . BASE_URL . "/cliente/pages/index.php");
 exit;
 ?>

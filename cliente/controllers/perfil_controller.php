@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../auth/session.php';
 require_once __DIR__ . '/../../auth/functions.php';
@@ -80,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header('Location: /proyecto-01/cliente/pages/perfil.php');
+    header('Location: ' . BASE_URL . '/cliente/pages/perfil.php');
     exit;
 }
 

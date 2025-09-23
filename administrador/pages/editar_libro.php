@@ -1,4 +1,6 @@
 <?php
+require_once '../../config/config.php';
+
 // 1. Incluir el controlador unificado
 require_once '../controllers/libro_form_controller.php';
 
@@ -6,12 +8,12 @@ require_once '../controllers/libro_form_controller.php';
 include '../../public/componentes/admin_header.php';
 ?>
 
-<link rel="stylesheet" href="/proyecto-01/administrador/styles/editar.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/editar.css">
 
 <main class="container">
     <h1>Editar Libro</h1>
     
-    <a href="/proyecto-01/administrador/pages/libros.php" class="btn btn-secondary mb-3">
+    <a href="<?php echo BASE_URL; ?>/administrador/pages/libros.php" class="btn btn-secondary mb-3">
         <i class="fas fa-arrow-left"></i> Volver a Libros
     </a>
     
@@ -19,7 +21,7 @@ include '../../public/componentes/admin_header.php';
         <div class="alert alert-danger"><?php echo $error; ?></div>
     <?php endif; ?>
 
-    <form action="/proyecto-01/administrador/pages/editar_libro.php?id=<?php echo $libro_id; ?>" method="POST" enctype="multipart/form-data" class="form-container">
+    <form action="<?php echo BASE_URL; ?>/administrador/pages/editar_libro.php?id=<?php echo $libro_id; ?>" method="POST" enctype="multipart/form-data" class="form-container">
         <div class="form-group">
             <label for="nombre">Nombre del Libro</label>
             <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo htmlspecialchars($libro['nombre']); ?>" required>
@@ -60,7 +62,7 @@ include '../../public/componentes/admin_header.php';
             <label for="imagen">Imagen Actual</label>
             <div>
                 <?php if (!empty($libro['imagen'])): ?>
-                    <img src="/proyecto-01/public/<?php echo htmlspecialchars($libro['imagen']); ?>" alt="Imagen actual" width="100">
+                    <img src="<?php echo BASE_URL; ?>/public/<?php echo htmlspecialchars($libro['imagen']); ?>" alt="Imagen actual" width="100">
                 <?php else: ?>
                     <p>No hay imagen asignada.</p>
                 <?php endif; ?>

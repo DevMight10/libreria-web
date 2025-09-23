@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once '../../config/config.php';
 require_once '../../config/database.php';
 require_once '../../auth/session.php';
 require_once '../../auth/functions.php';
@@ -19,7 +20,7 @@ if ($is_edit) {
     $page_title = 'Editar Libro';
     $libro = $libroModel->find($libro_id);
     if (!$libro) {
-        header("Location: /proyecto-01/administrador/pages/libros.php?mensaje=Libro no encontrado");
+        header("Location: " . BASE_URL . "/administrador/pages/libros.php?mensaje=Libro no encontrado");
         exit;
     }
 } else {
@@ -76,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if ($success) {
-                header("Location: /proyecto-01/administrador/pages/libros.php?mensaje=" . urlencode($mensaje));
+                header("Location: " . BASE_URL . "/administrador/pages/libros.php?mensaje=" . urlencode($mensaje));
                 exit;
             } else {
                 $error = "Error al guardar el libro en la base de datos.";

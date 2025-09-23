@@ -1,14 +1,15 @@
 <?php
 // 1. Incluir el controlador
 require_once '../controllers/libros_controller.php';
+require_once '../../config/config.php';
 
-// Page-specific styles
-$page_specific_styles = '<link rel="stylesheet" href="/proyecto-01/cliente/styles/lista-libros.css">';
 
 // 2. Incluir el header
 include '../../public/componentes/header.php';
 
 ?>
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/lista-libros.css">
+
 
 <!-- 4. Contenido HTML -->
 <main class="container">
@@ -24,18 +25,18 @@ include '../../public/componentes/header.php';
     <h1><?php echo htmlspecialchars($page_title); ?></h1>
 
     <div class="search-bar">
-        <form action="/proyecto-01/cliente/pages/libros.php" method="GET">
+        <form action="<?php echo BASE_URL; ?>/cliente/pages/libros.php" method="GET">
             <input type="text" name="buscar" placeholder="Buscar por título, autor..." value="<?php echo htmlspecialchars($buscar_filtro); ?>">
             <button type="submit"><i class="fas fa-search"></i></button>
         </form>
     </div>
 
     <div class="filters">
-        <a href="/proyecto-01/cliente/pages/libros.php" class="filter-btn <?php echo !$genero_filtro ? 'active' : ''; ?>">
+        <a href="<?php echo BASE_URL; ?>/cliente/pages/libros.php" class="filter-btn <?php echo !$genero_filtro ? 'active' : ''; ?>">
             Todos
         </a>
         <?php foreach ($generos as $genero): ?>
-            <a href="/proyecto-01/cliente/pages/libros.php?genero=<?php echo $genero['id']; ?>"
+            <a href="<?php echo BASE_URL; ?>/cliente/pages/libros.php?genero=<?php echo $genero['id']; ?>"
                 class="filter-btn <?php echo $genero_filtro == $genero['id'] ? 'active' : ''; ?>">
                 <?php echo htmlspecialchars($genero['nombre']); ?>
             </a>
@@ -57,8 +58,8 @@ include '../../public/componentes/header.php';
                         }
                         ?>
                     </p>
-                    <a href="/proyecto-01/cliente/pages/libro_detalle.php?id=<?php echo $libro['id']; ?>">
-                        <img src="/proyecto-01/public/<?php echo $libro['imagen']; ?>"
+                    <a href="<?php echo BASE_URL; ?>/cliente/pages/libro_detalle.php?id=<?php echo $libro['id']; ?>">
+                        <img src="<?php echo BASE_URL; ?>/public/<?php echo $libro['imagen']; ?>"
                             alt="<?php echo htmlspecialchars($libro['nombre']); ?>">
                     </a>
                     <div class="libro-info">
@@ -68,14 +69,14 @@ include '../../public/componentes/header.php';
                         <p class="price"><?php echo formatPrice($libro['precio']); ?></p>
                     </div>
                     <div class="libro-actions">
-                        <a href="/proyecto-01/cliente/pages/libro_detalle.php?id=<?php echo $libro['id']; ?>"
+                        <a href="<?php echo BASE_URL; ?>/cliente/pages/libro_detalle.php?id=<?php echo $libro['id']; ?>"
                             class="btn btn-secondary">Ver Detalles</a>
                         <?php if (isLoggedIn()): ?>
                             <?php if ($libro['stock'] > 0): ?>
-                                <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" style="display: inline;">
+                                <form action="<?php echo BASE_URL; ?>/cliente/pages/carrito.php" method="POST" style="display: inline;">
                                     <input type="hidden" name="action" value="add">
                                     <input type="hidden" name="id" value="<?php echo $libro['id']; ?>">
-                                    <input type="hidden" name="return_url" value="/proyecto-01/cliente/pages/libros.php?<?php echo http_build_query($_GET); ?>">
+                                    <input type="hidden" name="return_url" value="<?php echo BASE_URL; ?>/cliente/pages/libros.php?<?php echo http_build_query($_GET); ?>">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fas fa-cart-plus"></i> Agregar
                                     </button>
@@ -84,7 +85,7 @@ include '../../public/componentes/header.php';
                                 <button class="btn btn-primary" disabled>Agotado</button>
                             <?php endif; ?>
                         <?php else: ?>
-                            <a href="/proyecto-01/auth/login.php" class="btn btn-primary">Inicia sesión para comprar</a>
+                            <a href="<?php echo BASE_URL; ?>/auth/login.php" class="btn btn-primary">Inicia sesión para comprar</a>
                         <?php endif; ?>
                     </div>
                 </div>

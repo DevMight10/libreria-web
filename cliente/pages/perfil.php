@@ -1,13 +1,14 @@
 <?php
 // 1. Incluir el controlador
 require_once '../controllers/perfil_controller.php';
+require_once '../../config/config.php';
 
 // 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
 
 <!-- 3. Link al CSS (podemos crear uno nuevo) -->
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/perfil.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/perfil.css">
 
 <!-- 4. Contenido HTML -->
 <main class="container">
@@ -23,15 +24,15 @@ include '../../public/componentes/header.php';
 
             <?php 
                 $foto_url = !empty($usuario['foto_perfil']) 
-                    ? '/proyecto-01/public/' . htmlspecialchars($usuario['foto_perfil']) 
-                    : '/proyecto-01/public/placeholder-user.jpg';
+                    ? BASE_URL . '/public/' . htmlspecialchars($usuario['foto_perfil']) 
+                    : BASE_URL . '/public/placeholder-user.jpg';
             ?>
             <img src="<?php echo $foto_url; ?>" alt="Foto de perfil" class="profile-pic">
             
             <button id="change-pic-btn" class="btn btn-secondary">Cambiar Foto</button>
 
             <div id="upload-form-container" class="upload-form-container">
-                <form action="/proyecto-01/cliente/pages/perfil.php" method="POST" enctype="multipart/form-data">
+                <form action="<?php echo BASE_URL; ?>/cliente/pages/perfil.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group file-input-wrapper">
                         <label for="foto_perfil" class="custom-file-upload">Seleccionar Foto</label>
                         <input type="file" name="foto_perfil" id="foto_perfil" required>
@@ -48,7 +49,7 @@ include '../../public/componentes/header.php';
             <?php if (isset($mensajes['info'])): ?><div class="alert alert-success"><?php echo htmlspecialchars($mensajes['info']); ?></div><?php endif; ?>
             <?php if (isset($errors['info'])): ?><div class="alert alert-danger"><?php echo htmlspecialchars($errors['info']); ?></div><?php endif; ?>
 
-            <form action="/proyecto-01/cliente/pages/perfil.php" method="POST">
+            <form action="<?php echo BASE_URL; ?>/cliente/pages/perfil.php" method="POST">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
@@ -67,7 +68,7 @@ include '../../public/componentes/header.php';
             <?php if (isset($mensajes['password'])): ?><div class="alert alert-success"><?php echo htmlspecialchars($mensajes['password']); ?></div><?php endif; ?>
             <?php if (isset($errors['password'])): ?><div class="alert alert-danger"><?php echo htmlspecialchars($errors['password']); ?></div><?php endif; ?>
 
-            <form action="/proyecto-01/cliente/pages/perfil.php" method="POST">
+            <form action="<?php echo BASE_URL; ?>/cliente/pages/perfil.php" method="POST">
                 <div class="form-group">
                     <label for="current_password">Contraseña Actual</label>
                     <input type="password" id="current_password" name="current_password" class="form-control" required>
@@ -93,4 +94,4 @@ include '../../public/componentes/header.php';
 // 5. Incluir el footer
 include '../../public/componentes/footer.php';
 ?>
-<script src="/proyecto-01/public/js/perfil.js" defer></script>
+<script src="<?php echo BASE_URL; ?>/public/js/perfil.js" defer></script>

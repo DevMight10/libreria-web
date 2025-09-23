@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once '../../config/config.php';
 require_once '../../config/database.php';
 require_once '../../auth/session.php';
 require_once '../../auth/functions.php';
@@ -26,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pedido_id']) && isset
             'buscar_codigo' => $_GET['buscar_codigo'] ?? '',
             'pagina' => $_GET['pagina'] ?? 1
         ]);
-        header("Location: /proyecto-01/administrador/pages/pedidos.php?{$query_params}&mensaje=Estado del pedido actualizado.");
+        header("Location: " . BASE_URL . "/administrador/pages/pedidos.php?{$query_params}&mensaje=Estado del pedido actualizado.");
         exit;
     } else {
         $error = "Error al actualizar el estado.";

@@ -7,7 +7,7 @@ include '../../public/componentes/header.php';
 ?>
 
 <!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/cart.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/cart.css">
 
 <!-- 4. Contenido HTML -->
 <main class="container">
@@ -23,14 +23,14 @@ include '../../public/componentes/header.php';
         <?php if ($carrito_vacio): ?>
             <div class="empty-cart">
                 <p>Tu carrito está vacío</p>
-                <a href="/proyecto-01/cliente/pages/libros.php" class="btn btn-primary">Continuar Comprando</a>
+                <a href="<?php echo BASE_URL; ?>/cliente/pages/libros.php" class="btn btn-primary">Continuar Comprando</a>
             </div>
         <?php else: ?>
             <div class="cart-items">
                 <?php foreach ($carrito_items as $libro_id => $item): ?>
                     <?php $max_quantity = $stocks[$libro_id] ?? 1; ?>
                     <div class="cart-item">
-                        <img src="/proyecto-01/public/<?php echo htmlspecialchars($item['imagen']); ?>"
+                        <img src="<?php echo BASE_URL; ?>/public/<?php echo htmlspecialchars($item['imagen']); ?>"
                             alt="<?php echo htmlspecialchars($item['nombre']); ?>">
 
                         <div class="cart-item-info">
@@ -39,7 +39,7 @@ include '../../public/componentes/header.php';
                         </div>
 
                         <div class="cart-item-actions">
-                            <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" class="quantity-form">
+                            <form action="<?php echo BASE_URL; ?>/cliente/pages/carrito.php" method="POST" class="quantity-form">
                                 <input type="hidden" name="libro_id" value="<?php echo $libro_id; ?>">
                                 <div class="quantity-controls">
                                     <input type="number" name="cantidad" value="<?php echo $item['cantidad']; ?>"
@@ -50,7 +50,7 @@ include '../../public/componentes/header.php';
                                 </div>
                             </form>
 
-                            <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" class="remove-form">
+                            <form action="<?php echo BASE_URL; ?>/cliente/pages/carrito.php" method="POST" class="remove-form">
                                 <input type="hidden" name="libro_id" value="<?php echo $libro_id; ?>">
                                 <button type="submit" name="remove_item" class="btn btn-danger">
                                     <i class="fas fa-trash"></i>
@@ -71,12 +71,12 @@ include '../../public/componentes/header.php';
                 </div>
 
                 <div class="cart-actions">
-                    <form action="/proyecto-01/cliente/pages/carrito.php" method="POST" style="display: inline;">
+                    <form action="<?php echo BASE_URL; ?>/cliente/pages/carrito.php" method="POST" style="display: inline;">
                         <button type="submit" name="clear_cart" class="btn btn-secondary">
                             Vaciar Carrito
                         </button>
                     </form>
-                    <a href="/proyecto-01/cliente/pages/confirmar_pedido.php" class="btn btn-primary">
+                    <a href="<?php echo BASE_URL; ?>/cliente/pages/confirmar_pedido.php" class="btn btn-primary">
                         Continuar
                     </a>
                 </div>

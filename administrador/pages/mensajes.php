@@ -1,4 +1,6 @@
 <?php
+require_once '../../config/config.php';
+
 // 1. Incluir el controlador
 require_once '../controllers/mensajes_controller.php';
 
@@ -7,7 +9,7 @@ include '../../public/componentes/admin_header.php';
 ?>
 
 <!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/administrador/styles/mensaje.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/mensaje.css">
 
 <!-- 4. Contenido HTML -->
 <main class="container">
@@ -74,7 +76,7 @@ include '../../public/componentes/admin_header.php';
                                 <a href="?<?php echo http_build_query($view_params); ?>" class="btn btn-sm btn-primary">
                                     <?php echo $is_expanded ? 'Cerrar' : 'Ver'; ?>
                                 </a>
-                                <form action="/proyecto-01/administrador/pages/mensajes.php" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este mensaje?');">
+                                <form action="<?php echo BASE_URL; ?>/administrador/pages/mensajes.php" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este mensaje?');">
                                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <input type="hidden" name="id" value="<?php echo $msg['id']; ?>">
                                     <input type="hidden" name="accion" value="eliminar">

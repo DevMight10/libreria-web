@@ -1,4 +1,6 @@
 <?php
+require_once '../../config/config.php';
+
 // 1. Incluir el controlador unificado
 require_once '../controllers/libro_form_controller.php';
 
@@ -7,13 +9,13 @@ include '../../public/componentes/admin_header.php';
 ?>
 
 <!-- 3. Link al CSS (puede ser uno común para ambos formularios) -->
-<link rel="stylesheet" href="/proyecto-01/administrador/styles/agregar_producto.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/agregar_producto.css">
 
 <!-- 4. Contenido HTML -->
 <main class="container">
     <h1><?php echo $page_title; ?></h1>
 
-    <a href="/proyecto-01/administrador/pages/libros.php" class="btn btn-secondary mb-3">
+    <a href="<?php echo BASE_URL; ?>/administrador/pages/libros.php" class="btn btn-secondary mb-3">
         <i class="fas fa-arrow-left"></i> Volver a Libros
     </a>
 
@@ -21,7 +23,7 @@ include '../../public/componentes/admin_header.php';
         echo "<div class='alert alert-danger'>{$error}</div>";
     endif; ?>
 
-    <form action="/proyecto-01/administrador/pages/agregar_libro.php" method="POST" enctype="multipart/form-data" class="form-container">
+    <form action="<?php echo BASE_URL; ?>/administrador/pages/agregar_libro.php" method="POST" enctype="multipart/form-data" class="form-container">
         
         <div class="form-group">
             <label for="nombre">Nombre del Libro</label>

@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once '../../config/config.php';
 require_once '../../config/database.php';
 require_once '../../auth/session.php';
 require_once '../../auth/functions.php';
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['accion'])) {
         if ($_POST['accion'] == 'eliminar' && isset($_POST['id'])) {
             if ($mensajeModel->delete($_POST['id'])) {
-                header("Location: /proyecto-01/administrador/pages/mensajes.php?mensaje=Mensaje eliminado con éxito");
+                header("Location: " . BASE_URL . "/administrador/pages/mensajes.php?mensaje=Mensaje eliminado con éxito");
                 exit;
             } else {
                 $error = "Error al eliminar el mensaje.";

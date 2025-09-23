@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once '../../config/config.php';
 require_once '../../config/database.php';
 require_once '../../auth/session.php';
 require_once '../../auth/functions.php';
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user) {
                 $nuevo_tipo = ($user['tipo'] == 'admin') ? 'cliente' : 'admin';
                 if ($usuarioModel->updateType($user_id, $nuevo_tipo)) {
-                    header("Location: /proyecto-01/administrador/pages/usuarios.php?mensaje=Rol de usuario actualizado.");
+                    header("Location: " . BASE_URL . "/administrador/pages/usuarios.php?mensaje=Rol de usuario actualizado.");
                     exit;
                 } else {
                     $error = "Error al actualizar el rol del usuario.";
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } elseif ($action === 'delete') {
             if ($usuarioModel->delete($user_id)) {
-                header("Location: /proyecto-01/administrador/pages/usuarios.php?mensaje=Usuario eliminado.");
+                header("Location: " . BASE_URL . "/administrador/pages/usuarios.php?mensaje=Usuario eliminado.");
                 exit;
             } else {
                 $error = "Error al eliminar el usuario.";

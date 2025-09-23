@@ -1,4 +1,6 @@
 <?php
+require_once '../../config/config.php';
+
 // 1. Incluir el controlador, que se encarga de toda la lógica
 require_once '../controllers/generos_controller.php';
 
@@ -7,7 +9,7 @@ include '../../public/componentes/admin_header.php';
 ?>
 
 <!-- 3. Link al CSS específico de la página -->
-<link rel="stylesheet" href="/proyecto-01/administrador/styles/categorias.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/categorias.css">
 
 <!-- 4. Contenido HTML de la página -->
 <main class="container">
@@ -23,7 +25,7 @@ include '../../public/componentes/admin_header.php';
     <div class="category-grid">
         <div class="form-container">
             <h2>Agregar Nuevo Género</h2>
-            <form action="/proyecto-01/administrador/pages/generos.php" method="POST">
+            <form action="<?php echo BASE_URL; ?>/administrador/pages/generos.php" method="POST">
                 <input type="hidden" name="action" value="add">
                 <div class="form-group">
                     <label for="nombre">Nombre del Género</label>
@@ -56,8 +58,8 @@ include '../../public/componentes/admin_header.php';
                                 <td><?php echo htmlspecialchars($genero['nombre']); ?></td>
                                 <td><?php echo $genero['libro_count']; ?></td>
                                 <td class="actions-cell-buttons">
-                                    <a href="/proyecto-01/administrador/pages/editar_genero.php?id=<?php echo $genero['id']; ?>" class="btn btn-sm btn-secondary" title="Editar">Editar</a>
-                                    <form action="/proyecto-01/administrador/pages/generos.php" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este género?');">
+                                    <a href="<?php echo BASE_URL; ?>/administrador/pages/editar_genero.php?id=<?php echo $genero['id']; ?>" class="btn btn-sm btn-secondary" title="Editar">Editar</a>
+                                    <form action="<?php echo BASE_URL; ?>/administrador/pages/generos.php" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este género?');">
                                         <input type="hidden" name="id" value="<?php echo $genero['id']; ?>">
                                         <input type="hidden" name="action" value="delete">
                                         <button type="submit" class="btn btn-sm btn-danger" title="Eliminar" <?php echo ($genero['libro_count'] > 0) ? 'disabled' : ''; ?>>Eliminar</button>

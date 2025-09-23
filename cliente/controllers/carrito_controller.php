@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../auth/session.php';
 require_once __DIR__ . '/../../auth/functions.php';
@@ -23,7 +24,7 @@ unset($_SESSION['mensaje_error'], $_SESSION['mensaje']); // Limpiar mensajes
 if (isset($_POST['action']) && $_POST['action'] == 'add') {
     $libro_id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
     $cantidad = isset($_POST['cantidad']) ? (int)$_POST['cantidad'] : 1;
-    $return_url = isset($_POST['return_url']) ? $_POST['return_url'] : '/proyecto-01/cliente/pages/libros.php';
+    $return_url = isset($_POST['return_url']) ? $_POST['return_url'] : BASE_URL . '/cliente/pages/libros.php';
 
     $libro = $libroModel->find($libro_id);
 
@@ -71,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Redirigir a la misma página para evitar reenvío de formulario
-    header('Location: /proyecto-01/cliente/pages/carrito.php');
+    header('Location: ' . BASE_URL . '/cliente/pages/carrito.php');
     exit;
 }
 

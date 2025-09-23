@@ -1,4 +1,6 @@
 <?php
+require_once '../../config/config.php';
+
 // 1. Incluir el controlador
 require_once '../controllers/dashboard_controller.php';
 
@@ -7,7 +9,7 @@ include '../../public/componentes/admin_header.php';
 ?>
 
 <!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/administrador/styles/index.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/index.css">
 
 <!-- 4. Contenido HTML -->
 <main class="container">
@@ -17,27 +19,27 @@ include '../../public/componentes/admin_header.php';
         <div class="stat-card">
             <h3><?= $stats['total_generos'] ?></h3>
             <p>Géneros</p>
-            <a href="/proyecto-01/administrador/pages/generos.php">Ver Géneros</a>
+            <a href="<?php echo BASE_URL; ?>/administrador/pages/generos.php">Ver Géneros</a>
         </div>
         <div class="stat-card">
             <h3><?= $stats['total_libros'] ?></h3>
             <p>Libros Activos</p>
-            <a href="/proyecto-01/administrador/pages/libros.php">Gestionar</a>
+            <a href="<?php echo BASE_URL; ?>/administrador/pages/libros.php">Gestionar</a>
         </div>
         <div class="stat-card">
             <h3><?= $stats['pedidos_pendientes'] ?></h3>
             <p>Pedidos Pendientes</p>
-            <a href="/proyecto-01/administrador/pages/pedidos.php">Ver Pedidos</a>
+            <a href="<?php echo BASE_URL; ?>/administrador/pages/pedidos.php">Ver Pedidos</a>
         </div>
         <div class="stat-card">
             <h3><?= $stats['mensajes_nuevos'] ?></h3>
             <p>Mensajes Nuevos</p>
-            <a href="/proyecto-01/administrador/pages/mensajes.php">Ver Mensajes</a>
+            <a href="<?php echo BASE_URL; ?>/administrador/pages/mensajes.php">Ver Mensajes</a>
         </div>
         <div class="stat-card">
             <h3><?= $stats['total_usuarios'] ?></h3>
             <p>Usuarios</p>
-            <a href="/proyecto-01/administrador/pages/usuarios.php">Ver Usuarios</a>
+            <a href="<?php echo BASE_URL; ?>/administrador/pages/usuarios.php">Ver Usuarios</a>
         </div>
     </div>
 
@@ -81,4 +83,4 @@ include '../../public/componentes/admin_footer.php';
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/proyecto-01/administrador/public/js/dashboard-chart.js"></script>
+<script src="<?php echo BASE_URL; ?>/administrador/public/js/dashboard-chart.js"></script>

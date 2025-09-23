@@ -1,5 +1,6 @@
 <?php
 // 1. Cargar dependencias
+require_once '../../config/config.php';
 require_once '../../config/database.php';
 require_once '../../auth/session.php';
 require_once '../../auth/functions.php';
@@ -19,7 +20,7 @@ $mensaje = $_GET['mensaje'] ?? null;
 // Acción para cambiar estado 'activo'
 if (isset($_GET['cambiar_estado']) && isset($_GET['id'])) {
     if ($libroModel->toggleStatus($_GET['id'], 'activo')) {
-        header("Location: /proyecto-01/administrador/pages/libros.php?mensaje=Estado del libro actualizado con éxito");
+        header("Location: " . BASE_URL . "/administrador/pages/libros.php?mensaje=Estado del libro actualizado con éxito");
         exit;
     } else {
         $error = "Error al actualizar el estado del libro o libro no encontrado.";
@@ -29,7 +30,7 @@ if (isset($_GET['cambiar_estado']) && isset($_GET['id'])) {
 // Acción para cambiar estado 'destacado'
 if (isset($_GET['destacar']) && isset($_GET['id'])) {
     if ($libroModel->toggleStatus($_GET['id'], 'destacado')) {
-        header("Location: /proyecto-01/administrador/pages/libros.php?mensaje=Libro actualizado");
+        header("Location: " . BASE_URL . "/administrador/pages/libros.php?mensaje=Libro actualizado");
         exit;
     } else {
         $error = "Error al actualizar el libro o libro no encontrado.";

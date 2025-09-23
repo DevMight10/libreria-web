@@ -1,24 +1,25 @@
 <?php
 // 1. Incluir el controlador
 require_once '../controllers/index_controller.php';
+require_once '../../config/config.php';
 
 // 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
 
 <!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/home.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/home.css">
 
 <!-- 4. Contenido HTML -->
      
-    <section class="hero" style="background-image: url('/proyecto-01/public/imgs/libreria.jpg');">
+    <section class="hero" style="background-image: url('<?php echo BASE_URL; ?>/public/imgs/libreria.jpg');">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <h1>Encuentra tu próxima aventura en <span class="highlight">Librería Adrimarth</span></h1>
             <p>Explora nuestro catálogo y sumérgete en un mundo de historias.</p>
             <div class="hero-actions">
-                <a href="/proyecto-01/cliente/pages/libros.php" class="btn btn-primary">Ver Catálogo</a>
-                <form action="/proyecto-01/cliente/pages/libros.php" method="GET" class="hero-search">
+                <a href="<?php echo BASE_URL; ?>/cliente/pages/libros.php" class="btn btn-primary">Ver Catálogo</a>
+                <form action="<?php echo BASE_URL; ?>/cliente/pages/libros.php" method="GET" class="hero-search">
                     <input type="text" name="buscar" placeholder="Buscar libros, autores...">
                     <button type="submit"><i class="fa-solid fa-search"></i></button>
                 </form>
@@ -55,14 +56,14 @@ include '../../public/componentes/header.php';
             <div class="products-grid">
                 <?php foreach ($libros_destacados as $libro): ?>
                     <div class="product-card">
-                        <a href="/proyecto-01/cliente/pages/libro_detalle.php?id=<?php echo $libro['id']; ?>" class="product-image-link">
-                            <img src="/proyecto-01/public/<?php echo htmlspecialchars($libro['imagen']); ?>" 
+                        <a href="<?php echo BASE_URL; ?>/cliente/pages/libro_detalle.php?id=<?php echo $libro['id']; ?>" class="product-image-link">
+                            <img src="<?php echo BASE_URL; ?>/public/<?php echo htmlspecialchars($libro['imagen']); ?>" 
                                  alt="<?php echo htmlspecialchars($libro['nombre']); ?>">
                         </a>
                         <div class="product-info">
                             <h3><?php echo htmlspecialchars($libro['nombre']); ?></h3>
                             <p class="price"><?php echo formatPrice($libro['precio']); ?></p>
-                            <a href="/proyecto-01/cliente/pages/libro_detalle.php?id=<?php echo $libro['id']; ?>" class="btn btn-secondary">Ver Detalles</a>
+                            <a href="<?php echo BASE_URL; ?>/cliente/pages/libro_detalle.php?id=<?php echo $libro['id']; ?>" class="btn btn-secondary">Ver Detalles</a>
                         </div>
                     </div>
                 <?php endforeach; ?>

@@ -1,4 +1,5 @@
 <?php
+require_once '../config/config.php';
 require_once '../config/database.php';
 require_once 'session.php';
 
@@ -39,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include '../public/componentes/header.php';
 ?>
 
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/login.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/login.css">
 
 <main class="auth-main">
     <div class="auth-container">
@@ -83,7 +84,7 @@ include '../public/componentes/header.php';
                     <button type="submit" class="btn btn-primary">Registrarse</button>
                 </form>
                 
-                <p>¿Ya tienes cuenta? <a href="/proyecto-01/auth/login.php">Inicia sesión aquí</a></p>
+                <p>¿Ya tienes cuenta? <a href="<?php echo BASE_URL; ?>/auth/login.php">Inicia sesión aquí</a></p>
             </div>
         </div>
     </div>

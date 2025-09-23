@@ -1,13 +1,14 @@
 <?php
 // 1. Incluir el controlador
 require_once '../controllers/mis_pedidos_controller.php';
+require_once '../../config/config.php';
 
 // 2. Incluir el header
 include '../../public/componentes/header.php';
 ?>
 
 <!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/cliente/styles/mis_pedidos.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/cliente/styles/mis_pedidos.css">
 
 <!-- 4. Contenido HTML -->
 <main class="container">
@@ -23,7 +24,7 @@ include '../../public/componentes/header.php';
     <div class="accordion">
         <?php if (empty($pedidos)): ?>
             <p>Aún no has realizado ningún pedido.</p>
-            <a href="/proyecto-01/cliente/pages/libros.php" class="btn btn-primary">Ver libros</a>
+            <a href="<?php echo BASE_URL; ?>/cliente/pages/libros.php" class="btn btn-primary">Ver libros</a>
         <?php else: ?>
             <?php foreach ($pedidos as $pedido_id => $pedido): ?>
                 <div class="accordion-item">
@@ -43,7 +44,7 @@ include '../../public/componentes/header.php';
                             <h4>Detalles del Pedido</h4>
                             <?php foreach ($pedido['libros'] as $libro): ?>
                                 <div class="product-item">
-                                    <img src="/proyecto-01/public/<?php echo htmlspecialchars($libro['imagen']); ?>" alt="<?php echo htmlspecialchars($libro['nombre']); ?>">
+                                    <img src="<?php echo BASE_URL; ?>/public/<?php echo htmlspecialchars($libro['imagen']); ?>" alt="<?php echo htmlspecialchars($libro['nombre']); ?>">
                                     <div class="product-info">
                                         <?php echo htmlspecialchars($libro['nombre']); ?>
                                         <small>Cantidad: <?php echo $libro['cantidad']; ?></small>
@@ -74,4 +75,4 @@ include '../../public/componentes/header.php';
 // 5. Incluir el footer
 include '../../public/componentes/footer.php';
 ?>
-<script src="/proyecto-01/cliente/public/js/accordion.js" defer></script>
+<script src="<?php echo BASE_URL; ?>/cliente/public/js/accordion.js" defer></script>

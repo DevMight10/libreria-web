@@ -1,4 +1,6 @@
 <?php
+require_once '../../config/config.php';
+
 // 1. Incluir el controlador
 require_once '../controllers/pedidos_controller.php';
 
@@ -7,7 +9,7 @@ include '../../public/componentes/admin_header.php';
 ?>
 
 <!-- 3. Link al CSS -->
-<link rel="stylesheet" href="/proyecto-01/administrador/styles/pedidos.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/administrador/styles/pedidos.css">
 
 <!-- 4. Contenido HTML -->
 <main class="container">
@@ -83,7 +85,7 @@ include '../../public/componentes/admin_header.php';
                                 <?php else: ?>
                                     <?php foreach ($pedido['libros'] as $libro): ?>
                                         <div class="product-item">
-                                            <img src="/proyecto-01/public/<?php echo htmlspecialchars($libro['libro_imagen']); ?>" alt="<?php echo htmlspecialchars($libro['libro_nombre']); ?>">
+                                            <img src="<?php echo BASE_URL; ?>/public/<?php echo htmlspecialchars($libro['libro_imagen']); ?>" alt="<?php echo htmlspecialchars($libro['libro_nombre']); ?>">
                                             <div class="product-info">
                                                 <?php echo htmlspecialchars($libro['libro_nombre']); ?>
                                                 <small>Cantidad: <?php echo $libro['cantidad']; ?></small>
@@ -144,4 +146,4 @@ include '../../public/componentes/admin_header.php';
 // 5. Incluir el footer
 include '../../public/componentes/admin_footer.php';
 ?>
-<script src="/proyecto-01/administrador/public/js/accordion.js" defer></script>
+<script src="<?php echo BASE_URL; ?>/administrador/public/js/accordion.js" defer></script>
