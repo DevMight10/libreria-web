@@ -1,12 +1,15 @@
 <?php
-class LibroModel {
+class LibroModel
+{
     private $pdo;
 
-    public function __construct($pdo) {
+    public function __construct($pdo)
+    {
         $this->pdo = $pdo;
     }
 
-    public function getAll($filtros = []) {
+    public function getAll($filtros = [])
+    {
         $where_conditions = [];
         $params = [];
         $limit_sql = '';
@@ -27,9 +30,10 @@ class LibroModel {
         }
 
         if (!empty($filtros['buscar'])) {
-            $where_conditions[] = '(p.nombre LIKE ? OR p.id = ?)';
-            $params[] = "%{$filtros['buscar']}";
-            $params[] = $filtros['buscar'];
+            $where_conditions[] = '(LOWER(p.nombre) LIKE ? OR LOWER(p.autor) LIKE ?)';
+            $search_param = "%" . strtolower($filtros['buscar']) . "%";
+            $params[] = $search_param;
+            $params[] = $search_param;
         }
 
         $sql_where = '';
@@ -47,18 +51,20 @@ class LibroModel {
                 {$sql_where}
                 ORDER BY p.fecha_creacion DESC
                 {$limit_sql}";
-        
+
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll();
     }
 
-    public function getGeneros() {
+    public function getGeneros()
+    {
         $stmt = $this->pdo->query("SELECT * FROM generos ORDER BY nombre");
         return $stmt->fetchAll();
     }
 
-    public function find($id) {
+    public function find($id)
+    {
         $sql = "SELECT p.*, c.nombre as genero_nombre 
                 FROM libros p
                 LEFT JOIN generos c ON p.genero_id = c.id
@@ -68,7 +74,8 @@ class LibroModel {
         return $stmt->fetch();
     }
 
-    public function toggleStatus($id, $field) {
+    public function toggleStatus($id, $field)
+    {
         if (!in_array($field, ['activo', 'destacado'])) {
             return false;
         }
@@ -86,7 +93,8 @@ class LibroModel {
         return $stmt_update->execute([$nuevo_estado, $id]);
     }
 
-    public function add($data) {
+    public function add($data)
+    {
         $sql = "INSERT INTO libros (nombre, autor, descripcion, precio, genero_id, stock, activo, destacado, imagen, fecha_creacion) 
                 VALUES (:nombre, :autor, :descripcion, :precio, :genero_id, :stock, :activo, :destacado, :imagen, NOW())";
         $stmt = $this->pdo->prepare($sql);
@@ -103,7 +111,8 @@ class LibroModel {
         ]);
     }
 
-    public function update($id, $data) {
+    public function update($id, $data)
+    {
         $sql = "UPDATE libros SET 
                     nombre = :nombre, 
                     autor = :autor, 
@@ -130,4 +139,3 @@ class LibroModel {
         ]);
     }
 }
-?>

@@ -19,7 +19,7 @@ include '../../public/componentes/header.php';
             <div class="hero-actions">
                 <a href="/proyecto-01/cliente/pages/libros.php" class="btn btn-primary">Ver Catálogo</a>
                 <form action="/proyecto-01/cliente/pages/libros.php" method="GET" class="hero-search">
-                    <input type="text" name="buscar" placeholder="Buscar libros, autores, géneros...">
+                    <input type="text" name="buscar" placeholder="Buscar libros, autores...">
                     <button type="submit"><i class="fa-solid fa-search"></i></button>
                 </form>
             </div>
