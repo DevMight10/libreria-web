@@ -152,7 +152,7 @@ h1 {
     border: 1px solid transparent;
 }
 
-.table .btn-secondary { border-color: #219ebc; color: #219ebc; }
+.table .btn-secondary { background-color: #219ebc; border-color: #219ebc; color: #fff; }
 .table .btn-secondary:hover { background-color: #219ebc; color: #fff; }
 
 .table .btn-warning { border-color: #ffb703; color: #ffb703; }
